@@ -1,28 +1,33 @@
 package com.example.mvi.weather.screen.base
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.viewbinding.ViewBinding
 
-abstract class BaseActivity<VB: ViewDataBinding, out V: BaseViewModel>: AppCompatActivity() {
+abstract class BaseActivity<VB : ViewDataBinding, out V : BaseViewModel> : AppCompatActivity() {
 
     protected lateinit var viewDataBinding: VB
 
     @LayoutRes
     abstract fun getLayoutId(): Int
 
+    abstract fun getViewModel(): V
+
+    abstract fun getViewModelVariable(): Int
+
+    abstract fun setUp()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         performDataBinding()
-
+        setUp()
     }
 
     protected fun performDataBinding() {
         viewDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
+        viewDataBinding.setVariable(getViewModelVariable(), getViewModel())
+        viewDataBinding.executePendingBindings()
     }
 }
