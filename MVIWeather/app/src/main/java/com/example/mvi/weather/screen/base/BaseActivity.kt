@@ -27,7 +27,10 @@ abstract class BaseActivity<VB : ViewDataBinding, out V : BaseViewModel> : AppCo
 
     protected fun performDataBinding() {
         viewDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
-        viewDataBinding.setVariable(getViewModelVariable(), getViewModel())
-        viewDataBinding.executePendingBindings()
+        viewDataBinding.apply {
+            setVariable(getViewModelVariable(), getViewModel())
+            lifecycleOwner = this@BaseActivity
+            executePendingBindings()
+        }
     }
 }
