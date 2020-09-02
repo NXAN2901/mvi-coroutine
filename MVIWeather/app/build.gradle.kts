@@ -1,9 +1,8 @@
 plugins {
     id("com.android.application")
-    kotlin("android")
-    kotlin("kapt")
     id("dagger.hilt.android.plugin")
     id("app-plugins")
+    kotlin("kapt")
 }
 
 android {
@@ -25,7 +24,7 @@ dependencies {
 
     implementation("androidx.fragment:fragment-ktx:1.2.5")
 
-    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
+    implementation(AppDeps.AndroidX.ConstraintLayout.CONSTRAINT_LAYOUT)
 
     // Hilt dependencies
     implementation("com.google.dagger:hilt-android:2.28.1-alpha")

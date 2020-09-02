@@ -1,5 +1,3 @@
-package com.example.mvi
-
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryExtension

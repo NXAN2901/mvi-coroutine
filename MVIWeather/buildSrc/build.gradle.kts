@@ -13,7 +13,7 @@ gradlePlugin {
     plugins {
         register("app-plugins") {
             id = "app-plugins"
-            implementationClass = "com.example.mvi.AppPlugins"
+            implementationClass = "AppPlugins"
         }
     }
 }
