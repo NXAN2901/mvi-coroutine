@@ -33,7 +33,8 @@ dependencies {
     // Hilt ViewModel extension
     implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02")
     kapt("androidx.hilt:hilt-compiler:1.0.0-alpha02")
-    kapt("com.google.dagger:hilt-android-compiler:1.0.0-alpha02")
+
+    implementation(coreModule("dispatchers"))
 
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
