@@ -8,4 +8,8 @@ object SharedVersions {
     object Kotlinx {
         const val COROUTINES = "1.3.5"
     }
+
+    object Hilt {
+        const val CORE = "2.28.1-alpha"
+    }
 }

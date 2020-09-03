@@ -33,6 +33,22 @@ object AppDeps {
             const val FRAGMENT = "androidx.fragment:fragment:$VERSION"
         }
 
+        object Hilt {
+            private const val VERSION = "2.28.1-alpha"
+
+            object Core {
+                const val ANDROID = "com.google.dagger:hilt-android:$VERSION"
+                const val ANDROID_COMPILER = "com.google.dagger:hilt-android-compiler:$VERSION"
+            }
+
+            object ViewModel {
+                private const val VERSION = "1.0.0-alpha02"
+                const val LIFECYCLE = "androidx.hilt:hilt-lifecycle-viewmodel:$VERSION"
+                const val COMPILER = "androidx.hilt:hilt-compiler:$VERSION"
+            }
+
+        }
+
     }
 
     object Kotlinx {
