@@ -14,6 +14,9 @@ dependencies {
     implementation(AppDeps.AndroidX.Fragment.FRAGMENT_KTX)
     // UI
     implementation(AppDeps.AndroidX.ConstraintLayout.CONSTRAINT_LAYOUT)
+
+    // Base
+    implementation(uiModule("base"))
     implementation(androidCoreModule("binding"))
 
     // ViewModel + LiveData

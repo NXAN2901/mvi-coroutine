@@ -5,5 +5,6 @@ include(
         ":android-core:android-core-binding",
         ":weather-stack:use-case",
         ":core:core-dispatchers",
-        ":ui:ui-splash"
+        ":ui:ui-splash",
+        ":ui:ui-base"
 )
