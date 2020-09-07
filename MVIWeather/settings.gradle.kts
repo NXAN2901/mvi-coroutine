@@ -2,6 +2,8 @@ rootProject.name = "MVIWeather"
 include(
         ":app",
         ":android-core:android-core-adapter",
+        ":android-core:android-core-binding",
         ":weather-stack:use-case",
-        ":core:core-dispatchers"
+        ":core:core-dispatchers",
+        ":ui:splash"
 )

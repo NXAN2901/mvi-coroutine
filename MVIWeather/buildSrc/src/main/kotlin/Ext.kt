@@ -18,3 +18,5 @@ fun Project.addHiltViewModelExtension(configName: String = "implementation") {
 }
 
 fun DependencyHandler.coreModule(moduleNotation: String) = project(":core:core-$moduleNotation")
+fun DependencyHandler.androidCoreModule(moduleNotation: String) = project(":android-core:android-core-$moduleNotation")
+fun DependencyHandler.uiModule(moduleNotation: String) = project(":ui:$moduleNotation")

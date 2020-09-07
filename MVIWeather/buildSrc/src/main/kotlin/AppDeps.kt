@@ -27,6 +27,19 @@ object AppDeps {
             const val LIVEDATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:$VERSION"
         }
 
+        object Navigation {
+            private const val VERSION = "2.3.0"
+            // JAVA
+            const val FRAGMENT = "androidx.navigation:navigation-fragment:$VERSION"
+            const val UI = "androidx.navigation:navigation-ui:$VERSION"
+            // Kotlin
+            const val FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:$VERSION"
+            const val UI_KTX = "androidx.navigation:navigation-ui-ktx:$VERSION"
+
+            const val RUNTIME = "androidx.navigation:navigation-runtime:$VERSION"
+            const val RUNTIME_KTX = "androidx.navigation:navigation-runtime-ktx:$VERSION"
+        }
+
         object Fragment {
             private const val VERSION = "1.3.0-alpha08"
             const val FRAGMENT_KTX = "androidx.fragment:fragment-ktx:$VERSION"
