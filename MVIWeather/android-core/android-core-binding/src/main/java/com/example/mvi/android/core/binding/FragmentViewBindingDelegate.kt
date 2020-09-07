@@ -1,5 +1,6 @@
 package com.example.mvi.android.core.binding
 
+import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +15,7 @@ import kotlin.reflect.KProperty
 
 class FragmentViewBindingDelegate<V : ViewBinding>(
     val fragment: Fragment,
-    val viewBindingFactory: (View) -> V
+    val viewBindingFactory: (LayoutInflater) -> V
 ) : ReadOnlyProperty<Fragment, V> {
 
     private var binding: V? = null
@@ -42,14 +43,14 @@ class FragmentViewBindingDelegate<V : ViewBinding>(
         if (!lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED)) {
             throw IllegalStateException("Should not attempt to get bindings when Fragment views are destroyed.")
         }
-        return viewBindingFactory(thisRef.requireView()).also {
+        return viewBindingFactory(thisRef.layoutInflater).also {
             this@FragmentViewBindingDelegate.binding = it
         }
 
     }
 }
 
-fun <V : ViewBinding> Fragment.viewBinding(viewBindingFactory: (View) -> V) =
+fun <V : ViewBinding> Fragment.viewBinding(viewBindingFactory: (LayoutInflater) -> V) =
     FragmentViewBindingDelegate(this, viewBindingFactory)
 
 inline  fun <V: ViewBinding> AppCompatActivity.viewBinding(crossinline bindingInflater: (LayoutInflater) -> V) =

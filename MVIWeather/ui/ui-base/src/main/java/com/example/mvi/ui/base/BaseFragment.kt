@@ -2,6 +2,7 @@ package com.example.mvi.ui.base
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
@@ -22,5 +23,5 @@ abstract class BaseFragment<V : ViewBinding>(@LayoutRes layoutId: Int) : Fragmen
 
 }
 
-fun <T: ViewBinding> BaseFragment<T>.viewBinding(viewBindingFactory: (View) -> T) =
+fun <T: ViewBinding> BaseFragment<T>.viewBinding(viewBindingFactory: (LayoutInflater) -> T) =
     viewBinding(viewBindingFactory)
