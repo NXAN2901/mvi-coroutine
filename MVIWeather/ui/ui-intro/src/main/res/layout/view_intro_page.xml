@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivIntro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/intro"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvIntroHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/intro_header_default"
+        android:textColor="@color/intro_header"
+        android:textSize="@dimen/font_intro_header"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:layout_constraintLeft_toLeftOf="@+id/ivIntro"
+        app:layout_constraintTop_toBottomOf="@+id/ivIntro" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvIntroDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:typeface="serif"
+        android:textSize="@dimen/font_intro_description"
+        android:text="@string/intro_description_default"
+        android:textColor="@color/intro_skip"
+        app:layout_constraintLeft_toLeftOf="@+id/ivIntro"
+        app:layout_constraintTop_toBottomOf="@+id/tvIntroHeader" />
+
+<!--    <com.example.mvi.guide.views.CurveView-->
+<!--        android:id="@+id/curve"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tvIntroDescription" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

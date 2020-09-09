@@ -38,6 +38,7 @@ object AppDeps {
 
             const val RUNTIME = "androidx.navigation:navigation-runtime:$VERSION"
             const val RUNTIME_KTX = "androidx.navigation:navigation-runtime-ktx:$VERSION"
+            const val DYNAMIC_FEATURES_FRAGMENT = "androidx.navigation:navigation-dynamic-features-fragment:$VERSION"
         }
 
         object Fragment {
@@ -62,6 +63,13 @@ object AppDeps {
 
         }
 
+    }
+
+    object Google {
+        object Material {
+            private const val VERSION = "1.3.0-alpha02"
+            const val MATERIAL = "com.google.android.material:material:$VERSION"
+        }
     }
 
     object Kotlinx {

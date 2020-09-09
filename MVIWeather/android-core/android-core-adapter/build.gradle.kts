@@ -3,6 +3,10 @@ plugins {
     id("app-plugins")
 }
 
+android {
+    buildFeatures.viewBinding = true
+}
+
 dependencies {
     implementation("androidx.core:core-ktx:1.3.1")
     implementation("androidx.appcompat:appcompat:1.2.0")

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="intro_skip">Skip</string>
+    <string name="intro_header_default">Explore …</string>
+    <string name="intro_description_default">Introduce somehing</string>
+</resources>

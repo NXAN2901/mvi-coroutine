@@ -6,5 +6,6 @@ include(
         ":weather-stack:use-case",
         ":core:core-dispatchers",
         ":ui:ui-splash",
-        ":ui:ui-base"
+        ":ui:ui-base",
+        ":ui:ui-intro"
 )
