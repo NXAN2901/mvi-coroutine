@@ -3,6 +3,7 @@ plugins {
     id("dagger.hilt.android.plugin")
     id("app-plugins")
     kotlin("kapt")
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -19,7 +20,10 @@ dependencies {
     implementation(AppDeps.AndroidX.Fragment.FRAGMENT)
 
     // UI module
-    implementation(uiModule("splash"))
+//    implementation(uiModule("splash"))
+//    implementation(uiModule("intro"))
+
+    implementation(commonModule("android"))
 
     // Hilt
     implementation(AppDeps.AndroidX.Hilt.Core.ANDROID)
@@ -28,4 +32,5 @@ dependencies {
     // Navigation
     implementation(AppDeps.AndroidX.Navigation.FRAGMENT_KTX)
     implementation(AppDeps.AndroidX.Navigation.UI_KTX)
+    implementation(AppDeps.AndroidX.Navigation.DYNAMIC_FEATURES_FRAGMENT)
 }

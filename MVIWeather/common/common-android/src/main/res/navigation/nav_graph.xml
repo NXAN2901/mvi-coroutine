@@ -8,6 +8,17 @@
     <fragment
         android:id="@+id/nav_splash"
         tools:layout="@layout/fragment_splash"
-        android:name="com.example.mvi.ui.splash.SplashFragment" />
+        android:name="com.example.mvi.ui.splash.SplashFragment">
+
+        <action
+            android:id="@+id/openIntro"
+            app:destination="@id/nav_intro"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_intro"
+        tools:layout="@layout/fragment_intro"
+        android:name="com.example.mvi.ui.intro.IntroFragment" />
 
 </navigation>
