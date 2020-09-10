@@ -1,4 +1,4 @@
-package com.example.mvi.common.android.navigation
+package com.example.mvi.ui.base.navigation
 
 import androidx.navigation.NavDirections
 

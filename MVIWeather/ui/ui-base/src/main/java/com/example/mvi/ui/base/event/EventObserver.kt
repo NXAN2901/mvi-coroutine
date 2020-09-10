@@ -1,4 +1,4 @@
-package com.example.mvi.common.android.event
+package com.example.mvi.ui.base.event
 
 import androidx.lifecycle.Observer
 

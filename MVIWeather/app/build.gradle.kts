@@ -17,13 +17,13 @@ android {
 dependencies {
     implementation(AppDeps.AndroidX.AppCompat.APPCOMPAT)
     implementation(AppDeps.AndroidX.ConstraintLayout.CONSTRAINT_LAYOUT)
-    implementation(AppDeps.AndroidX.Fragment.FRAGMENT)
 
     // UI module
-//    implementation(uiModule("splash"))
-//    implementation(uiModule("intro"))
+    implementation(uiModule("splash"))
+    implementation(uiModule("intro"))
 
-    implementation(commonModule("android"))
+    // Navigation
+    implementation(AppDeps.AndroidX.Navigation.FRAGMENT_KTX)
 
     // Hilt
     implementation(AppDeps.AndroidX.Hilt.Core.ANDROID)
@@ -31,6 +31,4 @@ dependencies {
 
     // Navigation
     implementation(AppDeps.AndroidX.Navigation.FRAGMENT_KTX)
-    implementation(AppDeps.AndroidX.Navigation.UI_KTX)
-    implementation(AppDeps.AndroidX.Navigation.DYNAMIC_FEATURES_FRAGMENT)
 }

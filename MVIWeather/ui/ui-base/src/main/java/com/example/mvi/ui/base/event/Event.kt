@@ -1,4 +1,4 @@
-package com.example.mvi.common.android.event
+package com.example.mvi.ui.base.event
 
 open class Event<out T>(private val content: T) {
     var hasBeenHandled = false

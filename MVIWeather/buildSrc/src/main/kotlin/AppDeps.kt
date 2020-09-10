@@ -2,7 +2,7 @@ object AppDeps {
     object AndroidX {
         object Core {
             private const val VERSION = "1.2.0"
-            const val KTX = "androidx.core:core-ktx$VERSION"
+            const val KTX = "androidx.core:core-ktx:$VERSION"
         }
 
         object ConstraintLayout {
