@@ -1,9 +1,9 @@
 plugins {
     id("com.android.library")
-    id("app-plugins")
     kotlin("android")
-    kotlin("kapt")
     id("androidx.navigation.safeargs.kotlin")
+    id("app-plugins")
+    kotlin("kapt")
 }
 
 android {
@@ -13,7 +13,7 @@ android {
 dependencies {
     implementation(AppDeps.Kotlinx.Coroutines.CORE)
     implementation(AppDeps.AndroidX.Fragment.FRAGMENT_KTX)
-    implementation(AppDeps.AndroidX.Core.KTX)
+//    implementation(AppDeps.AndroidX.Core.KTX)
     // UI
     implementation(AppDeps.AndroidX.ConstraintLayout.CONSTRAINT_LAYOUT)
 
@@ -33,11 +33,8 @@ dependencies {
     implementation(AppDeps.AndroidX.Navigation.UI_KTX)
     implementation(AppDeps.AndroidX.Navigation.DYNAMIC_FEATURES_FRAGMENT)
 
-    // Hilt core
-    implementation(AppDeps.AndroidX.Hilt.Core.ANDROID)
-    kapt(AppDeps.AndroidX.Hilt.Core.ANDROID_COMPILER)
-    // Hilt view model
-    implementation(AppDeps.AndroidX.Hilt.ViewModel.LIFECYCLE)
-    kapt(AppDeps.AndroidX.Hilt.ViewModel.COMPILER)
+    // Koin
+    implementation(AppDeps.Koin.CORE)
+    implementation(AppDeps.Koin.ANDROIDX_VIEWMODEL)
 
 }

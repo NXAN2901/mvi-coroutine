@@ -5,14 +5,16 @@ import androidx.navigation.fragment.findNavController
 import com.example.mvi.android.core.binding.viewBinding
 import com.example.mvi.ui.base.BaseFragment
 import com.example.mvi.ui.splash.databinding.FragmentSplashBinding
+import com.example.mvi.ui.splash.viewmodel.SplashVM
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashFragment : BaseFragment<FragmentSplashBinding, SplashVM>(R.layout.fragment_splash) {
 
-//    private val splashVM = SplashVM(application = requireActivity().application)
-    private val binding by viewBinding(FragmentSplashBinding::inflate)
+    private val splashVM : SplashVM by viewModel()
+
+    private val binding by viewBinding(FragmentSplashBinding::bind)
 
     override fun getViewBinding(): FragmentSplashBinding = binding
-
 
     override fun setUpView() {
         Handler().postDelayed({
@@ -20,7 +22,5 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashVM>(R.layout.fr
         }, 1000)
     }
 
-    override fun getViewModel(): SplashVM {
-        TODO("Not yet implemented")
-    }
+    override fun getViewModel(): SplashVM = splashVM
 }

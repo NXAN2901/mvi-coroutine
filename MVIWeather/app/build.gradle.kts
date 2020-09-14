@@ -1,6 +1,5 @@
 plugins {
     id("com.android.application")
-    id("dagger.hilt.android.plugin")
     id("app-plugins")
     kotlin("kapt")
     id("androidx.navigation.safeargs")
@@ -25,9 +24,9 @@ dependencies {
     // Navigation
     implementation(AppDeps.AndroidX.Navigation.FRAGMENT_KTX)
 
-    // Hilt
-    implementation(AppDeps.AndroidX.Hilt.Core.ANDROID)
-    kapt(AppDeps.AndroidX.Hilt.Core.ANDROID_COMPILER)
+    // Koin
+    implementation(AppDeps.Koin.CORE)
+    implementation(AppDeps.Koin.ANDROID)
 
     // Navigation
     implementation(AppDeps.AndroidX.Navigation.FRAGMENT_KTX)

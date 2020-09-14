@@ -5,8 +5,6 @@ plugins {
 
 android {
     buildFeatures.viewBinding = true
-
-
 }
 
 dependencies {

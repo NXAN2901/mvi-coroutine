@@ -22,16 +22,13 @@ dependencies {
     implementation(androidCoreModule("adapter"))
 
     // ViewModel + LiveData
-    implementation(AppDeps.AndroidX.LifeCycle.LIVEDATA_CORE)
-    implementation(AppDeps.AndroidX.LifeCycle.RUNTIME_KTX)
-    implementation(AppDeps.AndroidX.LifeCycle.COMMON)
-    implementation(AppDeps.AndroidX.LifeCycle.VIEWMODEL)
+//    implementation(AppDeps.AndroidX.LifeCycle.LIVEDATA_CORE)
+    implementation(AppDeps.AndroidX.LifeCycle.RUNTIME)
+    implementation(AppDeps.AndroidX.LifeCycle.COMMON_JAVA8)
+    implementation(AppDeps.AndroidX.LifeCycle.LIVEDATA_KTX)
     implementation(AppDeps.AndroidX.LifeCycle.VIEWMODEL_KTX)
 
-    // Hilt core
-    implementation(AppDeps.AndroidX.Hilt.Core.ANDROID)
-    kapt(AppDeps.AndroidX.Hilt.Core.ANDROID_COMPILER)
-    // Hilt view model
-    implementation(AppDeps.AndroidX.Hilt.ViewModel.LIFECYCLE)
-    kapt(AppDeps.AndroidX.Hilt.ViewModel.COMPILER)
+    // Koin
+    implementation(AppDeps.Koin.CORE)
+    implementation(AppDeps.Koin.ANDROIDX_VIEWMODEL)
 }

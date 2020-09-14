@@ -19,6 +19,7 @@ object AppDeps {
             private const val VERSION = "2.2.0"
             const val COMMON = "androidx.lifecycle:lifecycle-common:$VERSION"
             const val RUNTIME_KTX = "androidx.lifecycle:lifecycle-runtime-ktx:$VERSION"
+            const val RUNTIME = "androidx.lifecycle:lifecycle-runtime:$VERSION"
             const val COMMON_JAVA8 = "androidx.lifecycle:lifecycle-common-java8:$VERSION"
             const val VIEWMODEL = "androidx.lifecycle:lifecycle-viewmodel:$VERSION"
             const val VIEWMODEL_KTX = "androidx.lifecycle:lifecycle-viewmodel-ktx:$VERSION"
@@ -95,5 +96,12 @@ object AppDeps {
                 const val GSON = "com.squareup.retrofit2:converter-gson:$VERSION"
             }
         }
+    }
+
+    object Koin {
+        private const val VERSION = "2.1.6"
+        const val CORE = "org.koin:koin-core:$VERSION"
+        const val ANDROID = "org.koin:koin-android:$VERSION"
+        const val ANDROIDX_VIEWMODEL = "org.koin:koin-androidx-viewmodel:$VERSION"
     }
 }
