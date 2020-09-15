@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="intro_skip">#878787</color>
-    <color name="intro_header">#000000</color>
+    <color name="intro_skip">#FAFAFA</color>
+    <color name="intro_header">#F0F0F0</color>
+    <color name="intro_dot_default">#ADADBD</color>
+    <color name="intro_dot_selected">#EFEFEF</color>
 </resources>

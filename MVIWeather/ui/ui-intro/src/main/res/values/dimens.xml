@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="indicator_size">2dp</dimen>
+    <dimen name="indicator_size">4dp</dimen>
     <dimen name="font_intro_skip">16sp</dimen>
     <dimen name="font_intro_header">24sp</dimen>
     <dimen name="font_intro_description">16sp</dimen>

@@ -19,7 +19,8 @@ class IntroAdapter : ViewBindingAdapter<IntroItem, ViewIntroPageBinding>(IntroDi
 class IntroVH(binding: ViewIntroPageBinding) :
     ViewBindingHolder<IntroItem, ViewIntroPageBinding>(binding) {
     override fun bind(item: IntroItem) {
-
+        binding.tvIntroHeader.text = item.header
+        binding.tvIntroDescription.text = item.description
     }
 
 }
