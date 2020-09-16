@@ -10,5 +10,6 @@ include(
 
         ":ui:ui-splash",
         ":ui:ui-base",
-        ":ui:ui-intro"
+        ":ui:ui-intro",
+        ":ui:ui-home"
 )

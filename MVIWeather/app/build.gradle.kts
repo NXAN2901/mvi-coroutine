@@ -20,6 +20,7 @@ dependencies {
     // UI module
     implementation(uiModule("splash"))
     implementation(uiModule("intro"))
+    implementation(uiModule("home"))
 
     // Navigation
     implementation(AppDeps.AndroidX.Navigation.FRAGMENT_KTX)

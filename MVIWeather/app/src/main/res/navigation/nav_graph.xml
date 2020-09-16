@@ -5,20 +5,32 @@
     android:id="@+id/nav_graph"
     app:startDestination="@+id/nav_splash">
 
+    <include app:graph="@navigation/nav_main_graph" />
+
     <fragment
         android:id="@+id/nav_splash"
-        tools:layout="@layout/fragment_splash"
-        android:name="com.example.mvi.ui.splash.SplashFragment">
+        android:name="com.example.mvi.ui.splash.SplashFragment"
+        tools:layout="@layout/fragment_splash">
 
         <action
-            android:id="@+id/openIntro"
-            app:destination="@id/nav_intro"/>
+            android:id="@+id/splashToIntro"
+            app:destination="@id/nav_intro"
+            app:popUpTo="@id/nav_splash"
+            app:popUpToInclusive="true" />
 
     </fragment>
 
     <fragment
         android:id="@+id/nav_intro"
-        tools:layout="@layout/fragment_intro"
-        android:name="com.example.mvi.ui.intro.IntroFragment" />
+        android:name="com.example.mvi.ui.intro.IntroFragment"
+        tools:layout="@layout/fragment_intro">
+        <action
+            android:id="@+id/introToHome"
+            app:destination="@+id/nav_main_graph"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/nav_intro" />
+    </fragment>
+
+
 
 </navigation>

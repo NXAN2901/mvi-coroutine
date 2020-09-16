@@ -1,5 +1,7 @@
 plugins {
     id("com.android.library")
+    kotlin("android")
+    id("androidx.navigation.safeargs.kotlin")
     id("app-plugins")
     kotlin("kapt")
 }
@@ -11,21 +13,19 @@ android {
 dependencies {
     implementation(AppDeps.Kotlinx.Coroutines.CORE)
     implementation(AppDeps.AndroidX.Fragment.FRAGMENT_KTX)
+//    implementation(AppDeps.AndroidX.Core.KTX)
     // UI
-    implementation(AppDeps.AndroidX.AppCompat.APPCOMPAT)
     implementation(AppDeps.AndroidX.ConstraintLayout.CONSTRAINT_LAYOUT)
-    implementation(AppDeps.Google.Material.MATERIAL)
 
     // Base
     implementation(uiModule("base"))
     implementation(androidCoreModule("binding"))
-    implementation(androidCoreModule("adapter"))
 
     // ViewModel + LiveData
-//    implementation(AppDeps.AndroidX.LifeCycle.LIVEDATA_CORE)
-    implementation(AppDeps.AndroidX.LifeCycle.RUNTIME)
-    implementation(AppDeps.AndroidX.LifeCycle.COMMON_JAVA8)
-    implementation(AppDeps.AndroidX.LifeCycle.LIVEDATA_KTX)
+    implementation(AppDeps.AndroidX.LifeCycle.LIVEDATA_CORE)
+    implementation(AppDeps.AndroidX.LifeCycle.RUNTIME_KTX)
+    implementation(AppDeps.AndroidX.LifeCycle.COMMON)
+    implementation(AppDeps.AndroidX.LifeCycle.VIEWMODEL)
     implementation(AppDeps.AndroidX.LifeCycle.VIEWMODEL_KTX)
 
     // Navigation

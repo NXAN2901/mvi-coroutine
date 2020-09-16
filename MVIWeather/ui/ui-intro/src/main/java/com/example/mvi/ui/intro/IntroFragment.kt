@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.util.Log
 import android.view.View
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.mvi.android.core.binding.viewBinding
@@ -18,6 +19,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class IntroFragment : BaseFragment<FragmentIntroBinding, IntroVM>(R.layout.fragment_intro) {
 
+    private val introVM: IntroVM by viewModel()
+
+    private val binding by viewBinding(FragmentIntroBinding::bind)
+
     private val onPageChanged = object: ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
@@ -28,15 +33,15 @@ class IntroFragment : BaseFragment<FragmentIntroBinding, IntroVM>(R.layout.fragm
             }
         }
     }
-    private val introVM: IntroVM by viewModel()
-
-    private val binding by viewBinding(FragmentIntroBinding::bind)
 
     override fun getViewBinding(): FragmentIntroBinding = binding
 
     override fun getViewModel(): IntroVM = introVM
 
     override fun setUpView() {
+        binding.btnDone.setOnClickListener {
+            it.findNavController().navigate(R.id.introToHome)
+        }
         val introAdapter = IntroAdapter()
         binding.introPager.apply {
             adapter = introAdapter
@@ -54,11 +59,6 @@ class IntroFragment : BaseFragment<FragmentIntroBinding, IntroVM>(R.layout.fragm
                 IntroItem("Intro 3", "Des 3")
             )
         )
-    }
-
-    override fun onDetach() {
-        binding.introPager.unregisterOnPageChangeCallback(onPageChanged)
-        super.onDetach()
     }
 
 }

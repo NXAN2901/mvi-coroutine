@@ -1,6 +1,7 @@
 package com.example.mvi.weather
 
 import android.app.Application
+import com.example.mvi.ui.home.di.homeVMModule
 import com.example.mvi.ui.intro.di.introVMModule
 import com.example.mvi.ui.splash.di.splashVMModule
 import org.koin.android.ext.koin.androidContext
@@ -16,7 +17,8 @@ class WeatherApp: Application() {
             // declare modules
             modules(listOf(
                 splashVMModule,
-                introVMModule
+                introVMModule,
+                homeVMModule
             ))
         }
     }
