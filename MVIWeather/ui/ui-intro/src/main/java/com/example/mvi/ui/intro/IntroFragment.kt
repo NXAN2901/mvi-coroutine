@@ -2,8 +2,12 @@ package com.example.mvi.ui.intro
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.util.Log
 import android.view.View
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -17,7 +21,7 @@ import com.example.mvi.ui.intro.views.SliderTransformer
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class IntroFragment : BaseFragment<FragmentIntroBinding, IntroVM>(R.layout.fragment_intro) {
+class IntroFragment : BaseFragment<FragmentIntroBinding, IntroVM>(R.layout.fragment_intro), LifecycleObserver {
 
     private val introVM: IntroVM by viewModel()
 
@@ -49,7 +53,7 @@ class IntroFragment : BaseFragment<FragmentIntroBinding, IntroVM>(R.layout.fragm
             setPageTransformer(SliderTransformer(4))
             // Workaround for remove over scroll animation
             (getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-            registerOnPageChangeCallback(onPageChanged)
+
         }
         TabLayoutMediator(binding.introTabLayout, binding.introPager) { _, _ -> Unit }.attach()
         introAdapter.submitList(
@@ -59,6 +63,26 @@ class IntroFragment : BaseFragment<FragmentIntroBinding, IntroVM>(R.layout.fragm
                 IntroItem("Intro 3", "Des 3")
             )
         )
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        lifecycle.addObserver(this)
+    }
+
+    override fun onDetach() {
+        lifecycle.removeObserver(this)
+        super.onDetach()
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    fun addPagerListener() {
+        binding.introPager.registerOnPageChangeCallback(onPageChanged)
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    fun removePagerListener() {
+        binding.introPager.unregisterOnPageChangeCallback(onPageChanged)
     }
 
 }
