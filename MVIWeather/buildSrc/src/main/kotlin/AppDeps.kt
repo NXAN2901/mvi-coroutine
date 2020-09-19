@@ -104,4 +104,22 @@ object AppDeps {
         const val ANDROID = "org.koin:koin-android:$VERSION"
         const val ANDROIDX_VIEWMODEL = "org.koin:koin-androidx-viewmodel:$VERSION"
     }
+
+    object IO {
+        object FlowBinding {
+            private const val VERSION = "1.0.0-alpha04"
+            const val CORE = "io.github.reactivecircus.flowbinding:flowbinding-appcompat:$VERSION"
+            const val ANDROID = "io.github.reactivecircus.flowbinding:flowbinding-android:$VERSION"
+            const val APPCOMPAT = "io.github.reactivecircus.flowbinding:flowbinding-appcompat:$VERSION"
+            const val ACTIVITY = "io.github.reactivecircus.flowbinding:flowbinding-core:$VERSION"
+            const val DRAWER_LAYOUT = "io.github.reactivecircus.flowbinding:flowbinding-drawerlayout:$VERSION"
+            const val LIFECYCLE = "io.github.reactivecircus.flowbinding:flowbinding-lifecycle:$VERSION"
+            const val NAVIGATION = "io.github.reactivecircus.flowbinding:flowbinding-navigation:$VERSION"
+            const val PREFERENCE = "io.github.reactivecircus.flowbinding:flowbinding-preference:$VERSION"
+            const val RECYCLERVIEW = "io.github.reactivecircus.flowbinding:flowbinding-recyclerview:$VERSION"
+            const val SWIPE_REFRESH_LAYOUT = "io.github.reactivecircus.flowbinding:flowbinding-swiperefreshlayout:$VERSION"
+            const val VIEWPAGER = "io.github.reactivecircus.flowbinding:flowbinding-viewpager:$VERSION"
+            const val VIEWPAGER2 = "io.github.reactivecircus.flowbinding:flowbinding-viewpager2:$VERSION"
+        }
+    }
 }

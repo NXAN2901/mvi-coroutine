@@ -8,7 +8,9 @@ import android.view.View
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.mvi.android.core.binding.viewBinding
@@ -19,41 +21,48 @@ import com.example.mvi.ui.intro.databinding.FragmentIntroBinding
 import com.example.mvi.ui.intro.viewmodel.IntroVM
 import com.example.mvi.ui.intro.views.SliderTransformer
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import reactivecircus.flowbinding.android.view.clicks
+import reactivecircus.flowbinding.viewpager2.pageSelections
 
-class IntroFragment : BaseFragment<FragmentIntroBinding, IntroVM>(R.layout.fragment_intro), LifecycleObserver {
+@FlowPreview
+class IntroFragment : BaseFragment<FragmentIntroBinding, IntroVM>(R.layout.fragment_intro),
+    LifecycleObserver {
 
     private val introVM: IntroVM by viewModel()
 
     private val binding by viewBinding(FragmentIntroBinding::bind)
-
-    private val onPageChanged = object: ViewPager2.OnPageChangeCallback() {
-        override fun onPageSelected(position: Int) {
-            super.onPageSelected(position)
-            if (position == 2) {
-                binding.btnDone.visibility = View.VISIBLE
-            } else {
-                binding.btnDone.visibility = View.GONE
-            }
-        }
-    }
 
     override fun getViewBinding(): FragmentIntroBinding = binding
 
     override fun getViewModel(): IntroVM = introVM
 
     override fun setUpView() {
-        binding.btnDone.setOnClickListener {
-            it.findNavController().navigate(R.id.introToHome)
-        }
+        binding.btnDone
+            .clicks()
+            .onEach {
+                findNavController().navigate(R.id.introToHome)
+            }
+            .launchIn(lifecycleScope)
         val introAdapter = IntroAdapter()
         binding.introPager.apply {
             adapter = introAdapter
-            offscreenPageLimit = 4
-            setPageTransformer(SliderTransformer(4))
+            offscreenPageLimit = 3
+            setPageTransformer(SliderTransformer(3))
             // Workaround for remove over scroll animation
             (getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-
+            pageSelections()
+                .onEach { position ->
+                    if (position == 2) {
+                        binding.btnDone.visibility = View.VISIBLE
+                    } else {
+                        binding.btnDone.visibility = View.GONE
+                    }
+                }
+                .launchIn(lifecycleScope)
         }
         TabLayoutMediator(binding.introTabLayout, binding.introPager) { _, _ -> Unit }.attach()
         introAdapter.submitList(
@@ -63,26 +72,6 @@ class IntroFragment : BaseFragment<FragmentIntroBinding, IntroVM>(R.layout.fragm
                 IntroItem("Intro 3", "Des 3")
             )
         )
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        lifecycle.addObserver(this)
-    }
-
-    override fun onDetach() {
-        lifecycle.removeObserver(this)
-        super.onDetach()
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    fun addPagerListener() {
-        binding.introPager.registerOnPageChangeCallback(onPageChanged)
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    fun removePagerListener() {
-        binding.introPager.unregisterOnPageChangeCallback(onPageChanged)
     }
 
 }
