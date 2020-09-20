@@ -5,10 +5,7 @@ import android.animation.ObjectAnimator
 import android.content.Context
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.*
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +18,7 @@ import com.example.mvi.ui.intro.databinding.FragmentIntroBinding
 import com.example.mvi.ui.intro.viewmodel.IntroVM
 import com.example.mvi.ui.intro.views.SliderTransformer
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -41,12 +39,12 @@ class IntroFragment : BaseFragment<FragmentIntroBinding, IntroVM>(R.layout.fragm
     override fun getViewModel(): IntroVM = introVM
 
     override fun setUpView() {
-        binding.btnDone
-            .clicks()
-            .onEach {
-                findNavController().navigate(R.id.introToHome)
-            }
-            .launchIn(lifecycleScope)
+        binding.btnDone.executeIntroDone(lifecycleScope) {
+            findNavController().navigate(R.id.introToHome)
+        }
+        binding.tvSkip.executeIntroDone(lifecycleScope) {
+            findNavController().navigate(R.id.introToHome)
+        }
         val introAdapter = IntroAdapter()
         binding.introPager.apply {
             adapter = introAdapter
@@ -75,3 +73,6 @@ class IntroFragment : BaseFragment<FragmentIntroBinding, IntroVM>(R.layout.fragm
     }
 
 }
+
+fun View.executeIntroDone(scope: LifecycleCoroutineScope, action: () -> Unit) =
+    this.clicks().onEach { action.invoke() }.launchIn(scope)
