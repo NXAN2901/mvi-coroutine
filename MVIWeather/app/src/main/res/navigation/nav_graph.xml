@@ -29,8 +29,7 @@
             app:destination="@+id/nav_main_graph"
             app:popUpToInclusive="true"
             app:popUpTo="@id/nav_intro" />
+
     </fragment>
-
-
 
 </navigation>
