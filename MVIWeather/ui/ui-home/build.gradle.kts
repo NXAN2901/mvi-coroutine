@@ -36,4 +36,7 @@ dependencies {
     // Koin
     implementation(AppDeps.Koin.CORE)
     implementation(AppDeps.Koin.ANDROIDX_VIEWMODEL)
+
+    // FLow Binding
+    implementation(AppDeps.IO.FlowBinding.MATERIAL)
 }

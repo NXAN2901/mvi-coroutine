@@ -120,6 +120,7 @@ object AppDeps {
             const val SWIPE_REFRESH_LAYOUT = "io.github.reactivecircus.flowbinding:flowbinding-swiperefreshlayout:$VERSION"
             const val VIEWPAGER = "io.github.reactivecircus.flowbinding:flowbinding-viewpager:$VERSION"
             const val VIEWPAGER2 = "io.github.reactivecircus.flowbinding:flowbinding-viewpager2:$VERSION"
+            const val MATERIAL = "io.github.reactivecircus.flowbinding:flowbinding-material:$VERSION"
         }
     }
 }
