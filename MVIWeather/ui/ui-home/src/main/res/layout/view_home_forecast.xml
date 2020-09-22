@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:paddingVertical="10dp"
+    android:background="@color/transparent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivForecast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:tint="@color/home_header"
+        app:srcCompat="@drawable/ic_cloud_sun" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvForecastTempDif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="15&#176;c/25&#176;c"
+        android:textColor="@color/home_header"
+        android:textSize="14sp"
+        android:typeface="serif"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivForecast" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvForecastDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Today"
+        android:textColor="@color/home_header"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvForecastTempDif" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
