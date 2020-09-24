@@ -5,6 +5,7 @@ include(
         ":android-core:android-core-binding",
 
         ":weather-stack:use-case",
+        ":weather-stack:weather-repo-remote",
 
         ":core:core-dispatchers",
         ":core:core-domain",
