@@ -94,7 +94,16 @@ object AppDeps {
 
             object Converters {
                 const val GSON = "com.squareup.retrofit2:converter-gson:$VERSION"
+                const val MOSHI = "com.squareup.retrofit2:converter-moshi:$VERSION"
             }
+        }
+
+        object Moshi {
+            private const val VERSION = "1.9.2"
+            const val MOSHI = "com.squareup.moshi:moshi:$VERSION"
+            const val KOTLIN = "com.squareup.moshi:moshi-kotlin:$VERSION"
+            const val KOTLIN_CODEGEN = "com.squareup.moshi:moshi-kotlin-codegen:$VERSION"
+            const val ADAPTERS = "com.squareup.moshi:moshi-adapters:$VERSION"
         }
     }
 

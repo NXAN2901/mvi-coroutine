@@ -31,4 +31,13 @@ dependencies {
 
     // Navigation
     implementation(AppDeps.AndroidX.Navigation.FRAGMENT_KTX)
+
+    // Retrofit
+    implementation(AppDeps.Square.OkHttp.OKHTTP)
+    implementation(AppDeps.Square.OkHttp.LOGGING_INTERCEPTOR)
+    implementation(AppDeps.Square.Retrofit.RETROFIT)
+    implementation(AppDeps.Square.Retrofit.Converters.MOSHI)
+    // Moshi
+    implementation(AppDeps.Square.Moshi.MOSHI)
+    implementation(AppDeps.Square.Moshi.ADAPTERS)
 }
