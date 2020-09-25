@@ -18,6 +18,15 @@ fun Project.addHiltViewModelExtension(configName: String = "implementation") {
 }
 
 fun DependencyHandler.coreModule(moduleNotation: String) = project(":core:core-$moduleNotation")
-fun DependencyHandler.androidCoreModule(moduleNotation: String) = project(":android-core:android-core-$moduleNotation")
+fun DependencyHandler.androidCoreModule(moduleNotation: String) =
+    project(":android-core:android-core-$moduleNotation")
+
 fun DependencyHandler.uiModule(moduleNotation: String) = project(":ui:ui-$moduleNotation")
-fun DependencyHandler.commonModule(moduleNotation: String) = project(":common:common-$moduleNotation")
+fun DependencyHandler.commonModule(moduleNotation: String) =
+    project(":common:common-$moduleNotation")
+
+fun DependencyHandler.remoteRepoModule(moduleNotation: String) =
+    project(":$moduleNotation-stack:remote-repo-$moduleNotation")
+
+fun DependencyHandler.useCaseModule(featureNotation: String) =
+    project(":$featureNotation-stack:use-case-$featureNotation")

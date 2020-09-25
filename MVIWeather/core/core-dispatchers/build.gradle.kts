@@ -5,8 +5,8 @@ plugins {
 }
 
 dependencies {
-    implementation(AppDeps.AndroidX.Hilt.Core.ANDROID)
-    kapt(AppDeps.AndroidX.Hilt.Core.ANDROID_COMPILER)
     implementation(AppDeps.Kotlinx.Coroutines.CORE)
     implementation(AppDeps.Kotlinx.Coroutines.ANDROID)
+
+    implementation(AppDeps.Koin.CORE)
 }

@@ -4,8 +4,8 @@ include(
         ":android-core:android-core-adapter",
         ":android-core:android-core-binding",
 
-        ":weather-stack:use-case",
-        ":weather-stack:weather-repo-remote",
+        ":weather-stack:use-case-weather",
+        ":weather-stack:remote-repo-weather",
 
         ":core:core-dispatchers",
         ":core:core-domain",

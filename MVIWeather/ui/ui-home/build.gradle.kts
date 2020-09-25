@@ -22,6 +22,10 @@ dependencies {
     implementation(androidCoreModule("binding"))
     implementation(androidCoreModule("adapter"))
 
+    // UseCase
+    implementation(useCaseModule("weather"))
+    implementation(coreModule("result"))
+
     // ViewModel + LiveData
     implementation(AppDeps.AndroidX.LifeCycle.LIVEDATA_CORE)
     implementation(AppDeps.AndroidX.LifeCycle.RUNTIME_KTX)

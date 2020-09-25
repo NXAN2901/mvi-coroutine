@@ -22,6 +22,13 @@ dependencies {
     implementation(uiModule("intro"))
     implementation(uiModule("home"))
 
+    // Core Module
+    implementation(remoteRepoModule("weather"))
+    implementation(coreModule("dispatchers"))
+
+    // UseCase module
+    implementation(useCaseModule("weather"))
+
     // Navigation
     implementation(AppDeps.AndroidX.Navigation.FRAGMENT_KTX)
 
@@ -37,6 +44,7 @@ dependencies {
     implementation(AppDeps.Square.OkHttp.LOGGING_INTERCEPTOR)
     implementation(AppDeps.Square.Retrofit.RETROFIT)
     implementation(AppDeps.Square.Retrofit.Converters.MOSHI)
+    implementation(AppDeps.Square.Retrofit.Converters.GSON)
     // Moshi
     implementation(AppDeps.Square.Moshi.MOSHI)
     implementation(AppDeps.Square.Moshi.ADAPTERS)
