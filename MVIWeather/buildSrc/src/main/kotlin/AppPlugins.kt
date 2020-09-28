@@ -54,6 +54,7 @@ class AppPlugins : Plugin<Project> {
                 target.tasks.withType(KotlinCompile::class.java).configureEach {
                     kotlinOptions {
                         jvmTarget = "1.8"
+                        freeCompilerArgs = listOf("-Xopt-in=kotlin.RequiresOptIn")
                     }
                 }
 
