@@ -14,6 +14,6 @@ interface WeatherAPIService {
         @Query("mode") mode: String?,
         @Query("units") units: String?,
         @Query("lang") language: String?
-    ): List<ForecastDomainModel>
+    ): ForecastDomainModel
 
 }

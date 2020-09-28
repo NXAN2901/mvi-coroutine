@@ -12,7 +12,7 @@ class WeatherRemoteRepoImpl(private val weatherAPIService: WeatherAPIService) : 
         mode: String?,
         units: String?,
         language: String?
-    ): List<ForecastDomainModel> =
+    ): ForecastDomainModel =
         weatherAPIService.fetchForecast3DayByCity(city, appId, cnt, mode, units, language)
 
 }

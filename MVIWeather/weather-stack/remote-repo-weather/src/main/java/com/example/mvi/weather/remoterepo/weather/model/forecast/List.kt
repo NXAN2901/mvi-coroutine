@@ -12,7 +12,7 @@ data class List(
     val main: Main,
 
     @SerializedName("weather")
-    val weather: Weather,
+    val weather: ArrayList<Weather>,
 
     @SerializedName("clouds")
     val clouds: Clouds,

@@ -1,7 +1,6 @@
 package com.example.mvi.weather.remoterepo.weather
 
 import com.example.mvi.weather.remoterepo.weather.model.forecast.ForecastDomainModel
-import retrofit2.http.Query
 
 interface WeatherRemoteRepo {
 
@@ -12,5 +11,5 @@ interface WeatherRemoteRepo {
         mode: String? = "json",
         units: String? = "metric",
         language: String? = "en"
-    ): List<ForecastDomainModel>
+    ): ForecastDomainModel
 }
