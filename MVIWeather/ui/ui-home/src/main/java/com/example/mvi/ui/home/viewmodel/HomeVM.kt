@@ -2,15 +2,10 @@ package com.example.mvi.ui.home.viewmodel
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.mvi.core.result.Success
 import com.example.mvi.ui.base.BaseViewModel
-import com.example.mvi.ui.home.HomeUIEvent
-import com.example.mvi.ui.home.HomeViewIntent
+import com.example.mvi.ui.home.*
 import com.example.mvi.usecase.weather.FetchForecastUseCase
-import com.example.mvi.weather.remoterepo.weather.model.forecast.ForecastDomainModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
@@ -22,30 +17,48 @@ class HomeVM(application: Application, private val fetchForecastUseCase: FetchFo
     BaseViewModel(application) {
 
     private val _intentChannel = ConflatedBroadcastChannel<HomeViewIntent>()
-    private val _uiEvents = MutableLiveData<HomeUIEvent>()
 
-    val uiEvents: LiveData<HomeUIEvent>
-        get() = _uiEvents
+    val viewState: StateFlow<HomeViewState>
+
 
     init {
-        _intentChannel.asFlow()
-            .distinctUntilChanged()
-            .onEach { homeViewIntent ->
-                when (homeViewIntent) {
-                    is HomeViewIntent.FetchForecasts -> fetchForeCasts(homeViewIntent)
-                }
-            }
-            .launchIn(viewModelScope)
+        val initialVS = HomeViewState.initial()
+        viewState = MutableStateFlow(initialVS)
+        _intentChannel.asFlow().also { flowChannel ->
+            merge(
+                flowChannel.filterIsInstance<HomeViewIntent.Initial>().take(1),
+                flowChannel.filterNot { it is HomeViewIntent.Initial }
+            )
+                .toPartialChange()
+                .scan(initialVS) { vs, change -> change.reduce(vs) }
+                .onEach { viewState.value = it }
+                .catch { Log.e("ANNX", "Error $it") }
+                .launchIn(viewModelScope)
+        }
     }
+
+    private fun Flow<HomeViewIntent>.toPartialChange(): Flow<HomePartialChange> {
+        val forecastFlow = fetchForecasts()
+            .onStart { emit(HomePartialChange.GetForecast.Loading) }
+            .catch { emit(HomePartialChange.GetForecast.Error(it)) }
+        return merge(
+            filterIsInstance<HomeViewIntent.Initial>()
+                .logIntent()
+                .flatMapConcat { forecastFlow }
+        )
+    }
+
 
     suspend fun processIntent(intent: HomeViewIntent) = _intentChannel.send(intent)
 
-    private suspend fun fetchForeCasts(forecastRepo: HomeViewIntent.FetchForecasts) {
+    private fun fetchForecasts() = flow<HomePartialChange.GetForecast> {
         val forecastDomainData =
             fetchForecastUseCase(FetchForecastUseCase.Params("Thanh pho Ho Chi Minh,vn"))
-        if (forecastDomainData is Success<ForecastDomainModel>) {
-            _uiEvents.value = HomeUIEvent.Forecasts(forecastDomainData.get())
-        }
+        val forecast = HomeForecast(forecastDomainData.getOrThrow())
+        emit(HomePartialChange.GetForecast.Data(forecast))
     }
+
+    private fun <T : HomeViewIntent> Flow<T>.logIntent() =
+        onEach { Log.d(HomeVM::class.simpleName, ">>> Intent: $it") }
 
 }

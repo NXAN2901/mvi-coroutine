@@ -1,21 +1,17 @@
 package com.example.mvi.ui.home
 
 import android.util.Log
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvi.android.core.binding.viewBinding
 import com.example.mvi.ui.base.BaseFragment
 import com.example.mvi.ui.home.databinding.FragmentHomeBinding
 import com.example.mvi.ui.home.view.forecast.HomeForecastAdapter
 import com.example.mvi.ui.home.view.forecast.HomeForecastItem
-import com.example.mvi.ui.home.view.forecast.SpanningLinearLayoutManager
 import com.example.mvi.ui.home.viewmodel.HomeVM
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import reactivecircus.flowbinding.material.offsetChanges
 
@@ -25,6 +21,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
 
     private val homeVM: HomeVM by viewModel()
     private val binding by viewBinding(FragmentHomeBinding::bind)
+    private val viewIntents = merge(
+        flowOf(HomeViewIntent.Initial)
+    )
 
     override fun getViewBinding(): FragmentHomeBinding = binding
 
@@ -49,21 +48,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
                 HomeForecastItem(System.currentTimeMillis(), 30)
             )
         )
-
-        getViewModel().uiEvents.observe(viewLifecycleOwner, Observer {
-            renderUIEvent(it)
-        })
-
-        lifecycleScope.launchWhenCreated {
-            getViewModel().processIntent(HomeViewIntent.FetchForecasts("Thanh pho Ho Chi Minh,vn"))
-        }
+        setUpEvent()
     }
 
-    private fun renderUIEvent(event: HomeUIEvent) {
-        Log.e("ANNX", "renderUIEvent $event")
-        when (event) {
-            is HomeUIEvent.Forecasts -> Log.e("ANNX", "Forecast gotten ${event.data}")
+    private fun setUpEvent() {
+        lifecycleScope.launchWhenStarted {
+            getViewModel().viewState.onEach {
+                renderUIByViewState(it)
+            }.collect()
         }
+
+        viewIntents
+            .onEach {
+                getViewModel().processIntent(it)
+            }
+            .launchIn(lifecycleScope)
     }
+
+    private fun renderUIByViewState(viewState: HomeViewState) {
+        Log.e("ANNX", "[renderUIByViewState] viewState: $viewState")
+    }
+
 
 }

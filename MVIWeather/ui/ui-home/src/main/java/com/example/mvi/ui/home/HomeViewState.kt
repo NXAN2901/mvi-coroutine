@@ -1,24 +1,30 @@
 package com.example.mvi.ui.home
 
+import com.example.mvi.weather.remoterepo.weather.model.forecast.ForecastDomainModel
+
 data class HomeViewState(
     val isLoading: Boolean,
-    val forecastItems: List<HomeForecastItem>,
+    val forecastItems: HomeForecast?,
     val isRefreshing: Boolean,
     val error: Throwable?
 ) {
     companion object {
         fun initial(): HomeViewState = HomeViewState(
             isLoading = true,
-            forecastItems = emptyList(),
+            forecastItems = null,
             isRefreshing = false,
             error = null
         )
     }
 }
 
-data class HomeForecastItem(
+data class HomeForecast(
     val city: String
-)
+) {
+    constructor(domain: ForecastDomainModel) : this(
+        city = domain.city.name
+    )
+}
 
 sealed class HomePartialChange {
 
@@ -44,8 +50,8 @@ sealed class HomePartialChange {
         }
 
         object Loading : GetForecast()
-        data class Data(val forecasts: List<HomeForecastItem>): GetForecast()
-        data class Error(val error: Throwable): GetForecast()
+        data class Data(val forecasts: HomeForecast?) : GetForecast()
+        data class Error(val error: Throwable) : GetForecast()
     }
 
 }
