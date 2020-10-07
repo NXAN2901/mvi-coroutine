@@ -2,9 +2,6 @@ package com.example.mvi.weather.remoterepo.weather.model.forecast
 
 import com.example.mvi.core.domain.DomainModel
 import com.google.gson.annotations.SerializedName
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-import kotlin.collections.List
 
 data class ForecastDomainModel(
 
@@ -18,7 +15,7 @@ data class ForecastDomainModel(
     val cnt: Int,
 
     @SerializedName("list")
-    val list: ArrayList<com.example.mvi.weather.remoterepo.weather.model.forecast.List>,
+    val threeHourForecastList: ArrayList<ThreeHourForecast>,
 
     @SerializedName("city")
     val city: City

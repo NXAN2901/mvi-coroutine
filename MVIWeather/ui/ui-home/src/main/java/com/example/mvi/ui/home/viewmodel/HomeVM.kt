@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.mvi.ui.base.BaseViewModel
 import com.example.mvi.ui.home.*
+import com.example.mvi.ui.home.models.HomeForecast
 import com.example.mvi.usecase.weather.FetchForecastUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview

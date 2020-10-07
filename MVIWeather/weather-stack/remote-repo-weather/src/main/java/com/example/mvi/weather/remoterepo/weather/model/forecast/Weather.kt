@@ -6,14 +6,14 @@ import com.squareup.moshi.JsonClass
 
 data class Weather(
     @SerializedName("id")
-    val id: Int,
+    val id: Long,
 
-//    @SerializedName("main")
-//    val main: String,
-//
-//    @SerializedName("description")
-//    val description: String,
-//
+    @SerializedName("main")
+    val status: String,
+
+    @SerializedName("description")
+    val description: String,
+
     @SerializedName("icon")
     val icon: String
 )

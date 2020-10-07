@@ -1,6 +1,6 @@
 package com.example.mvi.ui.home
 
-import com.example.mvi.weather.remoterepo.weather.model.forecast.ForecastDomainModel
+import com.example.mvi.ui.home.models.HomeForecast
 
 data class HomeViewState(
     val isLoading: Boolean,
@@ -18,13 +18,6 @@ data class HomeViewState(
     }
 }
 
-data class HomeForecast(
-    val city: String
-) {
-    constructor(domain: ForecastDomainModel) : this(
-        city = domain.city.name
-    )
-}
 
 sealed class HomePartialChange {
 

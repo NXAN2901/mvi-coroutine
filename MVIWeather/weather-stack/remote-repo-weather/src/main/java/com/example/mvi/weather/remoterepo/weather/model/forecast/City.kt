@@ -21,7 +21,7 @@ data class City(
     val population: Int,
 
     @SerializedName("timezone")
-    val timezone: Int,
+    val timezone: Long,
 
     @SerializedName("sunrise")
     val sunrise: Long,
