@@ -10,4 +10,7 @@ dependencies {
     implementation(AppDeps.Square.Moshi.KOTLIN)
     implementation(AppDeps.Square.Moshi.ADAPTERS)
     implementation(coreModule("domain"))
+
+    implementation(AppDeps.Kotlinx.Coroutines.CORE)
+    implementation(AppDeps.Koin.CORE)
 }

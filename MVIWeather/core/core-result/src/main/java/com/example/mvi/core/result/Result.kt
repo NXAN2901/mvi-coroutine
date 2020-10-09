@@ -16,17 +16,21 @@ package com.example.mvi.core.result
  * limitations under the License.
  */
 
-sealed class Result<T> {
+sealed class Result<out T> {
     open fun get(): T? = null
 
     fun getOrThrow(): T = when (this) {
         is Success -> get()
         is Failure -> throw throwable
     }
+
+    data class Success<T>(val data: T) : Result<T>() {
+        override fun get(): T = data
+    }
+    data class Failure(val throwable: Throwable) : Result<Nothing>()
+//    object Loading : Result<Nothing>()
 }
 
-data class Success<T>(val data: T) : Result<T>() {
-    override fun get(): T = data
-}
+val Result<*>.succeeded
+        get() = this is Result.Success && data != null
 
-data class Failure<T>(val throwable: Throwable) : Result<T>()

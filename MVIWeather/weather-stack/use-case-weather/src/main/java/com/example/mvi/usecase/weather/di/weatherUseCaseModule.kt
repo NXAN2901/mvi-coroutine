@@ -1,8 +1,12 @@
 package com.example.mvi.usecase.weather.di
 
 import com.example.mvi.usecase.weather.FetchForecastUseCase
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import org.koin.dsl.module
 
+@FlowPreview
+@ExperimentalCoroutinesApi
 val weatherUseCaseModule = module {
     factory { FetchForecastUseCase(get(), get()) }
 }

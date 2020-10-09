@@ -40,8 +40,6 @@ class HomeVM(application: Application, private val fetchForecastUseCase: FetchFo
 
     private fun Flow<HomeViewIntent>.toPartialChange(): Flow<HomePartialChange> {
         val forecastFlow = fetchForecasts()
-            .onStart { emit(HomePartialChange.GetForecast.Loading) }
-            .catch { emit(HomePartialChange.GetForecast.Error(it)) }
         return merge(
             filterIsInstance<HomeViewIntent.Initial>()
                 .logIntent()
@@ -52,11 +50,14 @@ class HomeVM(application: Application, private val fetchForecastUseCase: FetchFo
 
     suspend fun processIntent(intent: HomeViewIntent) = _intentChannel.send(intent)
 
-    private fun fetchForecasts() = flow<HomePartialChange.GetForecast> {
-        val forecastDomainData =
-            fetchForecastUseCase(FetchForecastUseCase.Params("Thanh pho Ho Chi Minh,vn"))
-        val forecast = HomeForecast(forecastDomainData.getOrThrow())
-        emit(HomePartialChange.GetForecast.Data(forecast))
+    private fun fetchForecasts() = flow {
+        fetchForecastUseCase(FetchForecastUseCase.Params("Thanh pho Ho Chi Minh,vn"))
+            .onStart { emit(HomePartialChange.GetForecast.Loading) }
+            .onEach {
+                emit(HomePartialChange.GetForecast.Data(HomeForecast(it.getOrThrow())))
+            }.catch {
+                emit(HomePartialChange.GetForecast.Error(it))
+            }.collect()
     }
 
     private fun <T : HomeViewIntent> Flow<T>.logIntent() =

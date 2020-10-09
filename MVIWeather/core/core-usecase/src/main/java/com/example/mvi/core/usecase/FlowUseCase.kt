@@ -1,27 +1,30 @@
 package com.example.mvi.core.usecase
 
+import com.example.mvi.core.result.Result
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.channels.sendBlocking
 import kotlinx.coroutines.flow.*
+import java.lang.Exception
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-abstract class FlowUseCase<Type : Any, Params : Any> : ObservableUseCase<Type> {
+abstract class FlowUseCase<Params : Any, Type : Any>(private val coroutineDispatcher: CoroutineDispatcher) {
 
-    private val channel = ConflatedBroadcastChannel<Params>()
+//    private val channel = ConflatedBroadcastChannel<Params>()
 
-    operator fun invoke(params: Params) = channel.sendBlocking(params)
+    operator fun invoke(params: Params): Flow<Result<Type>> =
+        execute(params)
+            .catch { e -> emit(Result.Failure(Exception(e))) }
+            .flowOn(coroutineDispatcher)
 
-    protected abstract fun execute(params: Params): Flow<Type>
+    protected abstract fun execute(params: Params): Flow<Result<Type>>
 
-    fun produce(params: Params): Flow<Type> = execute(params = params)
 
-    override fun observe(): Flow<Type> =
-        channel.asFlow()
-            .distinctUntilChanged()
-            .flatMapLatest {
-                execute(it)
-            }.flowOn(dispatcher)
+//    override fun observe(): Flow<Type> =
+//        channel.asFlow()
+//            .distinctUntilChanged()
+//            .flatMapLatest {
+//                execute(it)
+//            }.flowOn(dispatcher)
 }

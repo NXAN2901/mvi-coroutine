@@ -2,21 +2,21 @@ package com.example.mvi.weather.remoterepo.weather.model.forecast
 
 import com.google.gson.annotations.SerializedName
 
-data class ThreeHourForecast(
+data class ThreeHourForecastResponse(
     @SerializedName("dt")
     val timeForecast: Long,
 
     @SerializedName("main")
-    val main: Main,
+    val main: MainResponse,
 
     @SerializedName("weather")
-    val weather: ArrayList<Weather>,
+    val weatherResponse: ArrayList<WeatherResponse>,
 
     @SerializedName("clouds")
     val clouds: Clouds,
 
     @SerializedName("wind")
-    val wind: Wind,
+    val wind: WindResponse,
 
     @SerializedName("visibility")
     val visibility: Int,

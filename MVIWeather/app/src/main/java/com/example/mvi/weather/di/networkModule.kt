@@ -1,8 +1,9 @@
 package com.example.mvi.weather.di
 
-import com.example.mvi.weather.remoterepo.WeatherRemoteRepoImpl
+import com.example.mvi.weather.remoterepo.FiveDayWeatherRepoImpl
 import com.example.mvi.weather.remoterepo.weather.WeatherAPIService
-import com.example.mvi.weather.remoterepo.weather.WeatherRemoteRepo
+import com.example.mvi.weather.remoterepo.weather.FiveDayWeatherRepo
+import com.example.mvi.weather.remoterepo.weather.mappers.ForecastResponseToDomainMapper
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import okhttp3.OkHttpClient
@@ -10,7 +11,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.*
 
 val networkModule = module {
@@ -30,8 +30,12 @@ val networkModule = module {
             .build()
     }
 
-    single<WeatherRemoteRepo> {
-        WeatherRemoteRepoImpl(get<Retrofit>().create(WeatherAPIService::class.java))
+    single<FiveDayWeatherRepo> {
+        FiveDayWeatherRepoImpl(
+            get<Retrofit>().create(WeatherAPIService::class.java),
+            get(),
+            get<ForecastResponseToDomainMapper>()
+        )
     }
 
 }

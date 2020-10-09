@@ -1,6 +1,7 @@
 package com.example.mvi.ui.home.models
 
-import com.example.mvi.weather.remoterepo.weather.model.forecast.City
+import com.example.mvi.core.domain.entity.City
+import com.example.mvi.weather.remoterepo.weather.model.forecast.CityResponse
 
 data class HomeCityForecast(
     val id: Long,
@@ -13,8 +14,8 @@ data class HomeCityForecast(
     constructor(domainModel: City) : this(
         id = domainModel.id,
         name = domainModel.name,
-        lat = domainModel.coordination.lat,
-        lon = domainModel.coordination.lon,
+        lat = domainModel.lat,
+        lon = domainModel.lon,
         country = domainModel.country,
         timezone = domainModel.timezone
     )

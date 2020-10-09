@@ -3,7 +3,7 @@ package com.example.mvi.weather.remoterepo.weather.model.forecast
 import com.example.mvi.core.domain.DomainModel
 import com.google.gson.annotations.SerializedName
 
-data class ForecastDomainModel(
+data class FiveDayForecastResponse(
 
     @SerializedName("cod")
     val cod: String,
@@ -15,8 +15,8 @@ data class ForecastDomainModel(
     val cnt: Int,
 
     @SerializedName("list")
-    val threeHourForecastList: ArrayList<ThreeHourForecast>,
+    val threeHourForecastResponseList: ArrayList<ThreeHourForecastResponse>,
 
     @SerializedName("city")
-    val city: City
+    val city: CityResponse
 ): DomainModel

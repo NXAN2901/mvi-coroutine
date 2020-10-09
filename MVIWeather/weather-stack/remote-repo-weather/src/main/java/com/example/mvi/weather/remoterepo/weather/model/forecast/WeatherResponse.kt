@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-data class Weather(
+data class WeatherResponse(
     @SerializedName("id")
     val id: Long,
 

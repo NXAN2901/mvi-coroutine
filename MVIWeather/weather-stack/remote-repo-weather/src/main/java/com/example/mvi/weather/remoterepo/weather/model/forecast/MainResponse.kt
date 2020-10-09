@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-data class Main (
+data class MainResponse (
     @SerializedName("temp")
     val temp: Float,
 

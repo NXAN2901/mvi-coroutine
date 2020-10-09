@@ -1,8 +1,11 @@
 package com.example.mvi.ui.home.models
 
-import com.example.mvi.weather.remoterepo.weather.model.forecast.Main
-import com.example.mvi.weather.remoterepo.weather.model.forecast.ThreeHourForecast
-import com.example.mvi.weather.remoterepo.weather.model.forecast.Weather
+import com.example.mvi.core.domain.entity.Main
+import com.example.mvi.core.domain.entity.ThreeHourForecast
+import com.example.mvi.core.domain.entity.Weather
+import com.example.mvi.weather.remoterepo.weather.model.forecast.MainResponse
+import com.example.mvi.weather.remoterepo.weather.model.forecast.ThreeHourForecastResponse
+import com.example.mvi.weather.remoterepo.weather.model.forecast.WeatherResponse
 
 data class HomeThreeHourForecast(
     val time: Long,
@@ -10,9 +13,9 @@ data class HomeThreeHourForecast(
     val weatherInfo: List<HomeWeatherInfo>
 ) {
     constructor(domainModel: ThreeHourForecast): this(
-        time = domainModel.timeForecast,
+        time = domainModel.time,
         forecastInfo = HomeForecastInfo(domainModel = domainModel.main),
-        weatherInfo = domainModel.weather.map(::HomeWeatherInfo)
+        weatherInfo = domainModel.weatherList.map(::HomeWeatherInfo)
     )
 }
 

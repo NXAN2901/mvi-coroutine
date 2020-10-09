@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-data class City(
+data class CityResponse(
     @SerializedName("id")
     val id: Long,
 
