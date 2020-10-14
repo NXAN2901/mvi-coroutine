@@ -6,6 +6,8 @@ import com.example.mvi.weather.remoterepo.weather.FiveDayWeatherRepo
 import com.example.mvi.weather.remoterepo.weather.mappers.ForecastResponseToDomainMapper
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -13,6 +15,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
+@ExperimentalCoroutinesApi
+@FlowPreview
 val networkModule = module {
     single {
         OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().apply {
