@@ -20,6 +20,7 @@ dependencies {
     // Base
     implementation(uiModule("base"))
     implementation(androidCoreModule("binding"))
+    implementation(coreModule("data"))
 
     // ViewModel + LiveData
     implementation(AppDeps.AndroidX.LifeCycle.LIVEDATA_CORE)
