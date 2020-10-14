@@ -64,6 +64,11 @@ object AppDeps {
 
         }
 
+        object DataStore {
+            private const val VERSION = "1.0.0-alpha01"
+            const val CORE = "androidx.datastore:datastore-core:$VERSION"
+            const val PREFERENCES = "androidx.datastore:datastore-preferences:$VERSION"
+        }
     }
 
     object Google {

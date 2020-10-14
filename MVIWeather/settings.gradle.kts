@@ -3,6 +3,7 @@ include(
         ":app",
         ":android-core:android-core-adapter",
         ":android-core:android-core-binding",
+        ":android-core:android-core-datastore",
 
         ":weather-stack:use-case-weather",
         ":weather-stack:remote-repo-weather",

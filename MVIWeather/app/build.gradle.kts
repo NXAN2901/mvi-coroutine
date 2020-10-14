@@ -25,6 +25,7 @@ dependencies {
     // Core Module
     implementation(remoteRepoModule("weather"))
     implementation(coreModule("dispatchers"))
+    implementation(coreModule("data"))
 
     // UseCase module
     implementation(useCaseModule("weather"))
