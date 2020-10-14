@@ -1,6 +1,7 @@
 package com.example.mvi.weather
 
 import android.app.Application
+import com.example.core.data.di.dataModules
 import com.example.mvi.coredispatchers.di.dispatcherModule
 import com.example.mvi.ui.home.di.homeVMModule
 import com.example.mvi.ui.intro.di.introVMModule
@@ -31,7 +32,8 @@ class WeatherApp : Application() {
                     splashVMModule,
                     introVMModule,
                     homeVMModule,
-                    weatherRepoModule
+                    weatherRepoModule,
+                    dataModules
                 )
             )
         }

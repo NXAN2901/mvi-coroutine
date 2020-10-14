@@ -12,6 +12,7 @@ include(
         ":core:core-domain",
         ":core:core-usecase",
         ":core:core-result",
+        ":core:core-data",
 
         ":ui:ui-splash",
         ":ui:ui-base",
