@@ -39,6 +39,7 @@ class SplashVM(
 
     private fun Flow<SplashViewIntent>.toPartialChange(): Flow<SplashPartialChange> {
         val tutorialFlagFlow = appFlagDataStore.tutorialFlagFlow
+            .debounce(SPLASH_DURATION)
             .map { SplashPartialChange.GetTutorialFlag.Data(it) as SplashPartialChange.GetTutorialFlag }
             .onStart { emit(SplashPartialChange.GetTutorialFlag.Loading) }
             .catch { }
@@ -47,6 +48,10 @@ class SplashVM(
             filterIsInstance<SplashViewIntent.Initial>()
                 .flatMapConcat { tutorialFlagFlow }
         )
+    }
+
+    companion object {
+        const val SPLASH_DURATION = 2000L
     }
 
 
