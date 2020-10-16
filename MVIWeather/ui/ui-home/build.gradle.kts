@@ -13,9 +13,9 @@ android {
 dependencies {
     implementation(AppDeps.Kotlinx.Coroutines.CORE)
     implementation(AppDeps.AndroidX.Fragment.FRAGMENT_KTX)
-//    implementation(AppDeps.AndroidX.Core.KTX)
     // UI
     implementation(AppDeps.AndroidX.ConstraintLayout.CONSTRAINT_LAYOUT)
+    implementation(AppDeps.AndroidX.SwipeRefreshLayout.SWIPE_REFRESH_LAYOUT)
 
     // Base
     implementation(uiModule("base"))

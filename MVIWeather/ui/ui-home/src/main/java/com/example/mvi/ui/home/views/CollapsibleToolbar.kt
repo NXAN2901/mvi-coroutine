@@ -1,4 +1,4 @@
-package com.example.mvi.ui.home.view
+package com.example.mvi.ui.home.views
 
 import android.content.Context
 import android.util.AttributeSet

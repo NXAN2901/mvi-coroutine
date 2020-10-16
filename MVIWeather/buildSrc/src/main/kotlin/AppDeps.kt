@@ -69,6 +69,11 @@ object AppDeps {
             const val CORE = "androidx.datastore:datastore-core:$VERSION"
             const val PREFERENCES = "androidx.datastore:datastore-preferences:$VERSION"
         }
+
+        object SwipeRefreshLayout {
+            private const val VERSION = "1.1.0"
+            const val SWIPE_REFRESH_LAYOUT = "androidx.swiperefreshlayout:swiperefreshlayout:$VERSION"
+        }
     }
 
     object Google {

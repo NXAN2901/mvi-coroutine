@@ -8,9 +8,10 @@ import com.example.core.data.datastore.TutorialFlag
 import com.example.mvi.android.core.binding.viewBinding
 import com.example.mvi.ui.base.BaseFragment
 import com.example.mvi.ui.home.databinding.FragmentHomeBinding
-import com.example.mvi.ui.home.view.forecast.HomeForecastAdapter
-import com.example.mvi.ui.home.view.forecast.HomeForecastItem
+import com.example.mvi.ui.home.views.forecast.threehour.HomeThreeHourForecastAdapter
+import com.example.mvi.ui.home.views.forecast.threehour.HomeThreeHourForecastItem
 import com.example.mvi.ui.home.viewmodel.HomeVM
+import com.example.mvi.ui.home.views.forecast.content.HomeContentAdapter
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
@@ -35,24 +36,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
     override fun getViewModel(): HomeVM = homeVM
 
     override fun setUpView() {
-        binding.appBar.offsetChanges().onEach { verticalOffset ->
-            val progress = -verticalOffset / binding.appBar.totalScrollRange.toFloat()
-            binding.scrollableLayout.scrollableContent.progress = progress
-        }.launchIn(lifecycleScope)
+//        binding.appBar.offsetChanges().onEach { verticalOffset ->
+//            val progress = -verticalOffset / binding.appBar.totalScrollRange.toFloat()
+//            binding.scrollableLayout.scrollableContent.progress = progress
+//        }.launchIn(lifecycleScope)
 
-        binding.scrollableLayout.rvHomeForecast.apply {
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            adapter = HomeForecastAdapter()
+//        binding.scrollableLayout.rvHomeForecast.apply {
+//            layoutManager =
+//                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+//            adapter = HomeThreeHourForecastAdapter()
+//        }
+
+//        (binding.scrollableLayout.rvHomeForecast.adapter as HomeThreeHourForecastAdapter).submitList(
+//            listOf(
+//                HomeThreeHourForecastItem(System.currentTimeMillis(), 15),
+//                HomeThreeHourForecastItem(System.currentTimeMillis(), 25),
+//                HomeThreeHourForecastItem(System.currentTimeMillis(), 30)
+//            )
+//        )
+        binding.apply {
+            scrollableLayout.rvContent.apply {
+                adapter = HomeContentAdapter(emptyList())
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            }
         }
-
-        (binding.scrollableLayout.rvHomeForecast.adapter as HomeForecastAdapter).submitList(
-            listOf(
-                HomeForecastItem(System.currentTimeMillis(), 15),
-                HomeForecastItem(System.currentTimeMillis(), 25),
-                HomeForecastItem(System.currentTimeMillis(), 30)
-            )
-        )
         setUpEvent()
     }
 
@@ -75,7 +83,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
     }
 
     private fun renderUIByViewState(viewState: HomeViewState) {
-        Log.e("ANNX", "[renderUIByViewState] viewState: $viewState")
+        binding.apply {
+            viewState.forecastItems.let { forecast ->
+                (scrollableLayout.rvContent.adapter as HomeContentAdapter).setDataList(forecast)
+            }
+        }
     }
 
 

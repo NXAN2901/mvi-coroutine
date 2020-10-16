@@ -54,7 +54,7 @@ class HomeVM(application: Application, private val fetchForecastUseCase: FetchFo
         fetchForecastUseCase(FetchForecastUseCase.Params("Thanh pho Ho Chi Minh,vn"))
             .onStart { emit(HomePartialChange.GetForecast.Loading) }
             .onEach {
-                emit(HomePartialChange.GetForecast.Data(HomeForecast(it.getOrThrow())))
+                emit(HomePartialChange.GetForecast.Data(listOf(HomeForecast.ThreeHour(it.getOrThrow()))))
             }.catch {
                 emit(HomePartialChange.GetForecast.Error(it))
             }.collect()

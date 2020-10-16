@@ -4,14 +4,14 @@ import com.example.mvi.ui.home.models.HomeForecast
 
 data class HomeViewState(
     val isLoading: Boolean,
-    val forecastItems: HomeForecast?,
+    val forecastItems: List<HomeForecast>,
     val isRefreshing: Boolean,
     val error: Throwable?
 ) {
     companion object {
         fun initial(): HomeViewState = HomeViewState(
             isLoading = true,
-            forecastItems = null,
+            forecastItems = ArrayList(),
             isRefreshing = false,
             error = null
         )
@@ -43,7 +43,7 @@ sealed class HomePartialChange {
         }
 
         object Loading : GetForecast()
-        data class Data(val forecasts: HomeForecast?) : GetForecast()
+        data class Data(val forecasts: List<HomeForecast>) : GetForecast()
         data class Error(val error: Throwable) : GetForecast()
     }
 
