@@ -1,6 +1,5 @@
 package com.example.mvi.ui.home
 
-import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.data.datastore.AppFlagDataStore
@@ -8,8 +7,6 @@ import com.example.core.data.datastore.TutorialFlag
 import com.example.mvi.android.core.binding.viewBinding
 import com.example.mvi.ui.base.BaseFragment
 import com.example.mvi.ui.home.databinding.FragmentHomeBinding
-import com.example.mvi.ui.home.views.forecast.threehour.HomeThreeHourForecastAdapter
-import com.example.mvi.ui.home.views.forecast.threehour.HomeThreeHourForecastItem
 import com.example.mvi.ui.home.viewmodel.HomeVM
 import com.example.mvi.ui.home.views.forecast.content.HomeContentAdapter
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -17,7 +14,6 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import reactivecircus.flowbinding.material.offsetChanges
 
 @ExperimentalCoroutinesApi
 @FlowPreview
@@ -40,20 +36,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
 //            val progress = -verticalOffset / binding.appBar.totalScrollRange.toFloat()
 //            binding.scrollableLayout.scrollableContent.progress = progress
 //        }.launchIn(lifecycleScope)
-
-//        binding.scrollableLayout.rvHomeForecast.apply {
-//            layoutManager =
-//                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-//            adapter = HomeThreeHourForecastAdapter()
-//        }
-
-//        (binding.scrollableLayout.rvHomeForecast.adapter as HomeThreeHourForecastAdapter).submitList(
-//            listOf(
-//                HomeThreeHourForecastItem(System.currentTimeMillis(), 15),
-//                HomeThreeHourForecastItem(System.currentTimeMillis(), 25),
-//                HomeThreeHourForecastItem(System.currentTimeMillis(), 30)
-//            )
-//        )
         binding.apply {
             scrollableLayout.rvContent.apply {
                 adapter = HomeContentAdapter(emptyList())
