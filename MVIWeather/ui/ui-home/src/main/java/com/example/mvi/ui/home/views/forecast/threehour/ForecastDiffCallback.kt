@@ -1,14 +1,22 @@
 package com.example.mvi.ui.home.views.forecast.threehour
 
 import com.example.mvi.android.core.adapter.ViewBindingDiffUtils
+import com.example.mvi.ui.home.models.HomeForecast
 
-object ForecastDiffCallback : ViewBindingDiffUtils<HomeThreeHourForecastItem>() {
-    override fun areItemsTheSame(oldItem: HomeThreeHourForecastItem, newItem: HomeThreeHourForecastItem): Boolean {
-        return oldItem.timeStamp == newItem.timeStamp
+object ForecastDiffCallback : ViewBindingDiffUtils<HomeForecast.HomeThreeHourForecast>() {
+
+    override fun areItemsTheSame(
+        oldItem: HomeForecast.HomeThreeHourForecast,
+        newItem: HomeForecast.HomeThreeHourForecast
+    ): Boolean {
+        return oldItem.time == newItem.time
     }
 
-    override fun areContentsTheSame(oldItem: HomeThreeHourForecastItem, newItem: HomeThreeHourForecastItem): Boolean {
-        return oldItem.timeStamp == newItem.timeStamp
+    override fun areContentsTheSame(
+        oldItem: HomeForecast.HomeThreeHourForecast,
+        newItem: HomeForecast.HomeThreeHourForecast
+    ): Boolean {
+        return oldItem.time == newItem.time
     }
 
 }
