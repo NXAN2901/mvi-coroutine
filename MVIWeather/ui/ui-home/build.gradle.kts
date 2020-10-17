@@ -26,6 +26,7 @@ dependencies {
     implementation(useCaseModule("weather"))
     implementation(coreModule("result"))
     implementation(coreModule("data"))
+    implementation(coreModule("utility"))
 
     // ViewModel + LiveData
     implementation(AppDeps.AndroidX.LifeCycle.LIVEDATA_CORE)
