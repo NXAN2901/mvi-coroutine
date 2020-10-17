@@ -13,6 +13,7 @@ include(
         ":core:core-usecase",
         ":core:core-result",
         ":core:core-data",
+        ":core:core-utility",
 
         ":ui:ui-splash",
         ":ui:ui-base",
