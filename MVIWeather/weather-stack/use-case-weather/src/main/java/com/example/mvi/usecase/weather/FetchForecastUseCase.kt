@@ -22,7 +22,8 @@ class FetchForecastUseCase(
         return channelFlow {
             fiveDayWeatherRepo.getFiveDayForecast(
                 city = params.city,
-                appId = "9fbcd9f15fe6eb070ff628be464279e5"
+                appId = "9fbcd9f15fe6eb070ff628be464279e5",
+                units = "metric"
             )
                 .onEach { channel.offer(Result.Success(data = it)) }
                 .catch { channel.offer(Result.Failure(throwable = it)) }
