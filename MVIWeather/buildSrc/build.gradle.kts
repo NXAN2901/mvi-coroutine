@@ -24,8 +24,8 @@ gradlePlugin {
 
 dependencies {
     compileOnly(gradleApi())
-    implementation("com.android.tools.build:gradle:4.0.2")
-    implementation("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0")
+    implementation("com.android.tools.build:gradle:4.1.0")
+    implementation("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.1")
     implementation(kotlin("gradle-plugin", "1.4.10"))
     implementation(kotlin("android-extensions"))
 
