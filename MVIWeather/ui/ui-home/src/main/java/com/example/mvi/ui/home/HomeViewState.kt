@@ -33,7 +33,7 @@ sealed class HomePartialChange {
                 is Data -> viewState.copy(
                     isLoading = false,
                     error = null,
-                    forecastItems = forecasts
+                    forecastItems = forecasts.toMutableList()
                 )
                 is Error -> viewState.copy(
                     isLoading = false,
