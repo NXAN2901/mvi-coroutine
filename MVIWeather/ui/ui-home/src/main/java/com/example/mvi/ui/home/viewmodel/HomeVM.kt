@@ -13,7 +13,6 @@ import com.example.mvi.usecase.weather.FetchForecastUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 
 @FlowPreview
@@ -32,20 +31,15 @@ class HomeVM(
     init {
         val initialVS = HomeViewState.initial()
         viewState = MutableStateFlow(initialVS)
-        _intentChannel.asFlow().also { flowChannel ->
-            merge(
-                flowChannel.filterIsInstance<HomeViewIntent.Initial>().take(1),
-                flowChannel.filterNot { it is HomeViewIntent.Initial }
-            )
-                .toPartialChange()
-                .scan(initialVS) { vs, change -> change.reduce(vs) }
-                .onEach {
-                    delay(500)
-                    viewState.value = it
-                }
-                .catch { Log.e("ANNX", "Error $it") }
-                .launchIn(viewModelScope)
-        }
+        _intentChannel.asFlow()
+            .distinctUntilChanged()
+            .toPartialChange()
+            .scan(initialVS) { vs, change -> change.reduce(vs) }
+            .onEach {
+                viewState.value = it
+            }
+            .catch { Log.e("ANNX", "Error $it") }
+            .launchIn(viewModelScope)
     }
 
     private fun Flow<HomeViewIntent>.toPartialChange(): Flow<HomePartialChange> {
@@ -53,16 +47,17 @@ class HomeVM(
             merge(
                 fetchCurrentWeather(),
                 fetchForecasts()
-            ).scan(ArrayList<HomeForecast>()) { acc, change ->
-                if (change is HomeForecast.CurrentWeather) {
-                    acc.add(0, change)
-                } else {
-                    acc.add(change)
+            )
+                .scan(ArrayList<HomeForecast>()) { acc, change ->
+                    if (change is HomeForecast.CurrentWeather) {
+                        acc.add(0, change)
+                    } else {
+                        acc.add(change)
+                    }
+                    acc
                 }
-                acc
-            }
                 .map { HomePartialChange.GetForecast.Data(it) as HomePartialChange }
-                .onStart { emit(HomePartialChange.GetForecast.Loading)}
+                .onStart { emit(HomePartialChange.GetForecast.Loading) }
                 .catch { emit(HomePartialChange.GetForecast.Error(it)) }
 
 

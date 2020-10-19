@@ -38,8 +38,8 @@ class HomeForecastVH(binding: ViewHomeForecastThreeHourBinding) :
         binding.apply {
             tvForecastTempDif.text = String.format(
                 itemView.context.getString(R.string.home_threehour_temp_diff),
-                floor(item.forecastInfo.tempMin.toDouble()).toInt(),
-                ceil(item.forecastInfo.tempMax.toDouble()).toInt()
+                floor(item.forecastInfo.tempMin).toInt(),
+                ceil(item.forecastInfo.tempMax).toInt()
             )
 
             tvTime.text = item.time.toDateFormat("HH:00")

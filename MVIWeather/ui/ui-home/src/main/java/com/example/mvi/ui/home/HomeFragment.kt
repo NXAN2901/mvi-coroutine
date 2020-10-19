@@ -32,10 +32,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
     override fun getViewModel(): HomeVM = homeVM
 
     override fun setUpView() {
-//        binding.appBar.offsetChanges().onEach { verticalOffset ->
-//            val progress = -verticalOffset / binding.appBar.totalScrollRange.toFloat()
-//            binding.scrollableLayout.scrollableContent.progress = progress
-//        }.launchIn(lifecycleScope)
         binding.apply {
             scrollableLayout.rvContent.apply {
                 adapter = HomeContentAdapter(emptyList())
