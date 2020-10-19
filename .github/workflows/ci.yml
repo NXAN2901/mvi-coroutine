@@ -1,0 +1,22 @@
+generate-dependency-graph:
+    name: Generate Dependency Graph
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v1
+
+      - name: Generate Dependency Graph
+        run: ./gradlew projectDependencyGraph
+
+      - name: Commmit
+        run: |
+          git config --local user.email 'NXAN2901@github.com'
+          git config --local user.name 'NXAN2901'
+          git diff --quiet && git diff --staged --quiet || git commit -am 'Update dependency graph'
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
