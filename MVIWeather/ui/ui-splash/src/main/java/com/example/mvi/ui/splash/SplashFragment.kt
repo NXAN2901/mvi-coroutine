@@ -1,5 +1,6 @@
 package com.example.mvi.ui.splash
 
+import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.core.data.datastore.TutorialFlag
@@ -48,6 +49,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashVM>(R.layout.fr
                     findNavController().navigate(R.id.splashToIntro)
                     return
                 }
+                Log.e("ANNX", "Splash Transit to Home")
                 findNavController().navigate(R.id.splashToHome)
             }
         }

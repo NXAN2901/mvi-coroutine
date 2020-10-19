@@ -1,14 +1,14 @@
 package com.example.mvi.weather.remoterepo.weather.mappers
 
 import com.example.mvi.core.domain.Mapper
-import com.example.mvi.core.domain.entity.Main
-import com.example.mvi.core.domain.entity.ThreeHourForecast
-import com.example.mvi.core.domain.entity.Weather
-import com.example.mvi.core.domain.entity.Wind
-import com.example.mvi.weather.remoterepo.weather.model.forecast.MainResponse
+import com.example.mvi.core.domain.entity.common.Main
+import com.example.mvi.core.domain.entity.forecast.ThreeHourForecast
+import com.example.mvi.core.domain.entity.common.Weather
+import com.example.mvi.core.domain.entity.common.Wind
+import com.example.mvi.weather.remoterepo.weather.model.common.MainResponse
+import com.example.mvi.weather.remoterepo.weather.model.common.WeatherResponse
 import com.example.mvi.weather.remoterepo.weather.model.forecast.ThreeHourForecastResponse
-import com.example.mvi.weather.remoterepo.weather.model.forecast.WeatherResponse
-import com.example.mvi.weather.remoterepo.weather.model.forecast.WindResponse
+import com.example.mvi.weather.remoterepo.weather.model.common.WindResponse
 
 class ThreeHourForecastResponseToDomainMapper(
     private val mainResponseToMainDomain: Mapper<MainResponse, Main>,

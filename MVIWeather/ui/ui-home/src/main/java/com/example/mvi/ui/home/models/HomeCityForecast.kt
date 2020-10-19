@@ -1,7 +1,6 @@
 package com.example.mvi.ui.home.models
 
-import com.example.mvi.core.domain.entity.City
-import com.example.mvi.weather.remoterepo.weather.model.forecast.CityResponse
+import com.example.mvi.core.domain.entity.common.City
 
 data class HomeCityForecast(
     val id: Long,

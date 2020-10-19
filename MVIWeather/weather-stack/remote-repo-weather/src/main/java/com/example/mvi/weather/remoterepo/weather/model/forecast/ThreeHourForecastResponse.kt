@@ -1,5 +1,9 @@
 package com.example.mvi.weather.remoterepo.weather.model.forecast
 
+import com.example.mvi.weather.remoterepo.weather.model.common.MainResponse
+import com.example.mvi.weather.remoterepo.weather.model.common.RainResponse
+import com.example.mvi.weather.remoterepo.weather.model.common.WeatherResponse
+import com.example.mvi.weather.remoterepo.weather.model.common.WindResponse
 import com.google.gson.annotations.SerializedName
 
 data class ThreeHourForecastResponse(
@@ -13,7 +17,7 @@ data class ThreeHourForecastResponse(
     val weatherResponse: ArrayList<WeatherResponse>,
 
     @SerializedName("clouds")
-    val clouds: Clouds,
+    val clouds: CloudsResponse,
 
     @SerializedName("wind")
     val wind: WindResponse,
@@ -26,7 +30,7 @@ data class ThreeHourForecastResponse(
     val pop: Float,
 
     @SerializedName("rain")
-    val rain: Rain?,
+    val rain: RainResponse?,
 
     @SerializedName("snow")
     val snow: Snow?,

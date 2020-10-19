@@ -1,9 +1,9 @@
 package com.example.mvi.weather.remoterepo.weather.mappers
 
 import com.example.mvi.core.domain.Mapper
-import com.example.mvi.core.domain.entity.City
-import com.example.mvi.core.domain.entity.FiveDayForecast
-import com.example.mvi.core.domain.entity.ThreeHourForecast
+import com.example.mvi.core.domain.entity.common.City
+import com.example.mvi.core.domain.entity.forecast.FiveDayForecast
+import com.example.mvi.core.domain.entity.forecast.ThreeHourForecast
 import com.example.mvi.weather.remoterepo.weather.model.forecast.CityResponse
 import com.example.mvi.weather.remoterepo.weather.model.forecast.FiveDayForecastResponse
 import com.example.mvi.weather.remoterepo.weather.model.forecast.ThreeHourForecastResponse

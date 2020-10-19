@@ -1,11 +1,10 @@
-package com.example.mvi.weather.remoterepo
+package com.example.mvi.weather.remoterepo.weather.repos.threehour
 
 import android.util.Log
 import com.example.mvi.core.domain.Mapper
-import com.example.mvi.core.domain.entity.FiveDayForecast
+import com.example.mvi.core.domain.entity.forecast.FiveDayForecast
 import com.example.mvi.coredispatchers.CoroutineDispatchers
 import com.example.mvi.weather.remoterepo.weather.WeatherAPIService
-import com.example.mvi.weather.remoterepo.weather.FiveDayWeatherRepo
 import com.example.mvi.weather.remoterepo.weather.model.forecast.FiveDayForecastResponse
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -15,11 +14,11 @@ import kotlinx.coroutines.withContext
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class FiveDayWeatherRepoImpl(
+class FiveDaysThreeHourWeatherRepoImpl(
     private val weatherAPIService: WeatherAPIService,
     private val dispatcher: CoroutineDispatchers,
     private val forecastResponseToDomainMapper: Mapper<FiveDayForecastResponse, FiveDayForecast>
-) : FiveDayWeatherRepo {
+) : FiveDaysThreeHourWeatherRepo {
 
     private sealed class Change {
         data class Refreshed(val fiveDayForecast: FiveDayForecast) : Change()
@@ -63,8 +62,8 @@ class FiveDayWeatherRepoImpl(
                     is Change.Refreshed -> value.fiveDayForecast
                 }
             }
-            .catch {  }
             .onEach { emit(it) }
+            .catch {  }
             .collect()
     }
 

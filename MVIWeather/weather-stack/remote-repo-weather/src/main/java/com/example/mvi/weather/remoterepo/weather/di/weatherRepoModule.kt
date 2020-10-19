@@ -12,14 +12,24 @@ val weatherRepoModule = module {
 
     factory { WindResponseToDomainMapper() }
 
-    factory { ThreeHourForecastResponseToDomainMapper(
-        get<MainResponseToMainDomainMapper>(),
-        get<WeatherResponseToDomainMapper>(),
-        get<WindResponseToDomainMapper>()
-    ) }
+    factory {
+        ThreeHourForecastResponseToDomainMapper(
+            get<MainResponseToMainDomainMapper>(),
+            get<WeatherResponseToDomainMapper>(),
+            get<WindResponseToDomainMapper>()
+        )
+    }
 
-    factory { ForecastResponseToDomainMapper(
-        get<ThreeHourForecastResponseToDomainMapper>(),
-        get<CityResponseToDomainMapper>()
-    ) }
+    factory {
+        ForecastResponseToDomainMapper(
+            get<ThreeHourForecastResponseToDomainMapper>(),
+            get<CityResponseToDomainMapper>()
+        )
+    }
+
+    factory {
+        CurrentWeatherResponseToDomainMapper(
+            get<MainResponseToMainDomainMapper>()
+        )
+    }
 }

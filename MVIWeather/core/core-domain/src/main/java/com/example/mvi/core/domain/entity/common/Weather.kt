@@ -1,4 +1,4 @@
-package com.example.mvi.core.domain.entity
+package com.example.mvi.core.domain.entity.common
 
 data class Weather(
     val id: Long,

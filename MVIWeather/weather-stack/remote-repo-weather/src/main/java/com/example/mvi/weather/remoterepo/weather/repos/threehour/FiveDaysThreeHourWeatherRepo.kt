@@ -1,10 +1,9 @@
-package com.example.mvi.weather.remoterepo.weather
+package com.example.mvi.weather.remoterepo.weather.repos.threehour
 
-import com.example.mvi.core.domain.entity.FiveDayForecast
-import com.example.mvi.weather.remoterepo.weather.model.forecast.FiveDayForecastResponse
+import com.example.mvi.core.domain.entity.forecast.FiveDayForecast
 import kotlinx.coroutines.flow.Flow
 
-interface FiveDayWeatherRepo {
+interface FiveDaysThreeHourWeatherRepo {
 
     fun getFiveDayForecast(city: String,
                            appId: String,

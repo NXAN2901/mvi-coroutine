@@ -1,10 +1,10 @@
 package com.example.mvi.ui.home.models
 
 import com.example.mvi.android.core.adapter.ViewBindingAdapterItem
-import com.example.mvi.core.domain.entity.FiveDayForecast
-import com.example.mvi.core.domain.entity.Main
-import com.example.mvi.core.domain.entity.ThreeHourForecast
-import com.example.mvi.core.domain.entity.Weather
+import com.example.mvi.core.domain.entity.forecast.FiveDayForecast
+import com.example.mvi.core.domain.entity.common.Main
+import com.example.mvi.core.domain.entity.forecast.ThreeHourForecast
+import com.example.mvi.core.domain.entity.common.Weather
 import com.example.mvi.ui.home.views.forecast.content.HomeForecastItemViewType
 import com.example.mvi.ui.home.views.forecast.threehour.ThreeHourForecastViewType
 

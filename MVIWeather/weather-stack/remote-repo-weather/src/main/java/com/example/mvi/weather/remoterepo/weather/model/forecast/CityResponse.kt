@@ -1,8 +1,7 @@
 package com.example.mvi.weather.remoterepo.weather.model.forecast
 
+import com.example.mvi.weather.remoterepo.weather.model.common.CoordinationResponse
 import com.google.gson.annotations.SerializedName
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 data class CityResponse(
     @SerializedName("id")
@@ -12,7 +11,7 @@ data class CityResponse(
     val name: String,
 
     @SerializedName("coord")
-    val coordination: Coordination,
+    val coordination: CoordinationResponse,
 
     @SerializedName("country")
     val country: String,
@@ -28,11 +27,4 @@ data class CityResponse(
 
     @SerializedName("sunset")
     val sunset: Long
-)
-
-data class Coordination(
-    @SerializedName("lat")
-    val lat: Float,
-    @SerializedName("lon")
-    val lon: Float
 )
