@@ -1,6 +1,6 @@
 package com.example.mvi.ui.home.models
 
-import com.example.mvi.core.domain.entity.common.City
+import com.example.mvi.core.domain.entity.common.CityDomain
 
 data class HomeCityForecast(
     val id: Long,
@@ -10,7 +10,7 @@ data class HomeCityForecast(
     val country: String,
     val timezone: Long
 ) {
-    constructor(domainModel: City) : this(
+    constructor(domainModel: CityDomain) : this(
         id = domainModel.id,
         name = domainModel.name,
         lat = domainModel.lat,

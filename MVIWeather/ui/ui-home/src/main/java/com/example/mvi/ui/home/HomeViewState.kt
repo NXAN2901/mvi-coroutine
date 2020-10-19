@@ -47,4 +47,16 @@ sealed class HomePartialChange {
         data class Error(val error: Throwable) : GetForecast()
     }
 
+//    sealed class GetCurrentWeather: HomePartialChange() {
+//        override fun reduce(viewState: HomeViewState): HomeViewState {
+//            when (this) {
+//
+//            }
+//        }
+//
+//        object Loading : GetCurrentWeather()
+//        data class Data(val currentWeather: HomeForecast) : GetCurrentWeather()
+//        data class Error(val error: Throwable) : GetCurrentWeather()
+//    }
+
 }

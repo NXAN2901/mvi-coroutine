@@ -1,10 +1,11 @@
 package com.example.mvi.ui.home.models
 
 import com.example.mvi.android.core.adapter.ViewBindingAdapterItem
-import com.example.mvi.core.domain.entity.forecast.FiveDayForecast
-import com.example.mvi.core.domain.entity.common.Main
-import com.example.mvi.core.domain.entity.forecast.ThreeHourForecast
-import com.example.mvi.core.domain.entity.common.Weather
+import com.example.mvi.core.domain.entity.common.MainDomain
+import com.example.mvi.core.domain.entity.common.WeatherDomain
+import com.example.mvi.core.domain.entity.current.CurrentWeatherDomain
+import com.example.mvi.core.domain.entity.forecast.FiveDayForecastDomain
+import com.example.mvi.core.domain.entity.forecast.ThreeHourForecastDomain
 import com.example.mvi.ui.home.views.forecast.content.HomeForecastItemViewType
 import com.example.mvi.ui.home.views.forecast.threehour.ThreeHourForecastViewType
 
@@ -13,7 +14,7 @@ sealed class HomeForecast: ViewBindingAdapterItem {
         val city: HomeCityForecast,
         val listThreeHourForecast: List<HomeThreeHourForecast>
     ) : HomeForecast() {
-        constructor(domainFiveDay: FiveDayForecast) : this(
+        constructor(domainFiveDay: FiveDayForecastDomain) : this(
             city = HomeCityForecast(domainFiveDay.city),
             listThreeHourForecast = domainFiveDay.threeHourForecasts.map(::HomeThreeHourForecast)
         )
@@ -23,8 +24,23 @@ sealed class HomeForecast: ViewBindingAdapterItem {
     }
 
     data class CurrentWeather(
-        val status: String
-    ) : HomeForecast() {
+        val name: String,
+        val tempMax: Float,
+        val tempMin: Float,
+        val currentTemp: Float,
+        val status: String,
+        val time: Long
+    ): HomeForecast() {
+
+        constructor(domainModel: CurrentWeatherDomain): this(
+            name= domainModel.name,
+            tempMax = domainModel.main.tempMax,
+            tempMin = domainModel.main.tempMin,
+            currentTemp = domainModel.main.temp,
+            time = domainModel.dt,
+            status = domainModel.weathersInfo[0].status
+        )
+
         override val itemViewType: Int
             get() = HomeForecastItemViewType.STATUS.ordinal
 
@@ -35,7 +51,7 @@ sealed class HomeForecast: ViewBindingAdapterItem {
         val forecastInfo: HomeForecastInfo,
         val weatherInfo: List<HomeWeatherInfo>
     ) : HomeForecast() {
-        constructor(domainModel: ThreeHourForecast) : this(
+        constructor(domainModel: ThreeHourForecastDomain) : this(
             time = domainModel.time,
             forecastInfo = HomeForecastInfo(domainModel = domainModel.main),
             weatherInfo = domainModel.weatherList.map(::HomeWeatherInfo)
@@ -49,7 +65,7 @@ sealed class HomeForecast: ViewBindingAdapterItem {
         val temp: Float,
         val tempMax: Float,
         val tempMin: Float) {
-        constructor(domainModel: Main) : this(
+        constructor(domainModel: MainDomain) : this(
             temp = domainModel.temp,
             tempMax = domainModel.tempMax,
             tempMin = domainModel.tempMin
@@ -62,7 +78,7 @@ sealed class HomeForecast: ViewBindingAdapterItem {
         val description: String,
         val iconName: String
     ) {
-        constructor(domainModel: Weather) : this(
+        constructor(domainModel: WeatherDomain) : this(
             id = domainModel.id,
             status = domainModel.status,
             description = domainModel.description,

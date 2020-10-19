@@ -1,6 +1,6 @@
 package com.example.mvi.core.domain.entity.common
 
-data class Weather(
+data class WeatherDomain(
     val id: Long,
     val status: String,
     val description: String,

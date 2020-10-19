@@ -32,11 +32,11 @@ val networkModule = module {
             .build()
     }
 
-    single<WeatherAPIService> { get<Retrofit>().create(WeatherAPIService::class.java) }
+//    single<WeatherAPIService> { get<Retrofit>().create(WeatherAPIService::class.java) }
 
     single<FiveDaysThreeHourWeatherRepo> {
         FiveDaysThreeHourWeatherRepoImpl(
-            get(),
+            get<Retrofit>().create(WeatherAPIService::class.java),
             get(),
             get<ForecastResponseToDomainMapper>()
         )
@@ -44,7 +44,7 @@ val networkModule = module {
 
     single<CurrentWeatherRepo> {
         CurrentWeatherRepoImpl(
-            get(),
+            get<Retrofit>().create(WeatherAPIService::class.java),
             get(),
             get<CurrentWeatherResponseToDomainMapper>()
         )

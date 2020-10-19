@@ -1,25 +1,26 @@
 package com.example.mvi.usecase.weather
 
-import com.example.mvi.core.domain.entity.forecast.FiveDayForecastDomain
+import com.example.mvi.core.domain.entity.current.CurrentWeatherDomain
 import com.example.mvi.core.result.Result
 import com.example.mvi.core.usecase.FlowUseCase
 import com.example.mvi.coredispatchers.CoroutineDispatchers
-import com.example.mvi.weather.remoterepo.weather.repos.threehour.FiveDaysThreeHourWeatherRepo
+import com.example.mvi.weather.remoterepo.weather.repos.current.CurrentWeatherRepo
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 
 @ExperimentalCoroutinesApi
 @FlowPreview
-class FetchForecastUseCase(
+class FetchCurrentWeatherUseCase(
     private val coroutineDispatchers: CoroutineDispatchers,
-    private val threeHourWeatherRepo: FiveDaysThreeHourWeatherRepo
-) : FlowUseCase<FetchForecastUseCase.Params, FiveDayForecastDomain>(coroutineDispatchers.io) {
+    private val currentWeatherRepo: CurrentWeatherRepo
+) : FlowUseCase<FetchCurrentWeatherUseCase.Params, CurrentWeatherDomain>(coroutineDispatchers.io) {
     data class Params(val city: String)
 
-    override fun execute(params: Params): Flow<Result<FiveDayForecastDomain>> {
+    override fun execute(params: Params): Flow<Result<CurrentWeatherDomain>> {
+
         return flow {
-            threeHourWeatherRepo.getFiveDayForecast(
+            currentWeatherRepo.getCurrentWeather(
                 city = params.city,
                 appId = "9fbcd9f15fe6eb070ff628be464279e5",
                 units = "metric"

@@ -1,6 +1,6 @@
 package com.example.mvi.core.domain.entity.common
 
-data class Main(
+data class MainDomain(
     val temp: Float,
     val tempMin: Float,
     val tempMax: Float

@@ -1,6 +1,6 @@
 package com.example.mvi.core.domain.entity.common
 
-data class City(
+data class CityDomain(
     val id: Long,
     val name: String,
     val lat: Float,

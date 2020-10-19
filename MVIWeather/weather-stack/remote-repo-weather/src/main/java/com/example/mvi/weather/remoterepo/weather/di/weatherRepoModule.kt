@@ -29,7 +29,8 @@ val weatherRepoModule = module {
 
     factory {
         CurrentWeatherResponseToDomainMapper(
-            get<MainResponseToMainDomainMapper>()
+            get<MainResponseToMainDomainMapper>(),
+            get<WeatherResponseToDomainMapper>()
         )
     }
 }

@@ -49,7 +49,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashVM>(R.layout.fr
                     findNavController().navigate(R.id.splashToIntro)
                     return
                 }
-                Log.e("ANNX", "Splash Transit to Home")
                 findNavController().navigate(R.id.splashToHome)
             }
         }
