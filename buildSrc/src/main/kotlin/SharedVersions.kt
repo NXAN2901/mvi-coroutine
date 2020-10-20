@@ -5,8 +5,8 @@ object SharedVersions {
         }
     }
 
-    object Kotlinx {
-        const val COROUTINES = "1.3.5"
+    object KotlinX {
+        const val COROUTINES = "1.4.0-M1"
     }
 
     object Hilt {
