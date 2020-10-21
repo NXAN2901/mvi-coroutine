@@ -9,7 +9,7 @@ import com.example.mvi.core.domain.entity.forecast.ThreeHourForecastDomain
 import com.example.mvi.ui.home.views.forecast.content.HomeForecastItemViewType
 import com.example.mvi.ui.home.views.forecast.threehour.ThreeHourForecastViewType
 
-sealed class HomeForecast: ViewBindingAdapterItem {
+sealed class HomeForecast : ViewBindingAdapterItem {
     data class ThreeHour(
         val city: HomeCityForecast,
         val listThreeHourForecast: List<HomeThreeHourForecast>
@@ -29,16 +29,18 @@ sealed class HomeForecast: ViewBindingAdapterItem {
         val tempMin: Float,
         val currentTemp: Float,
         val status: String,
-        val time: Long
-    ): HomeForecast() {
+        val time: Long,
+        val iconName: String
+    ) : HomeForecast() {
 
-        constructor(domainModel: CurrentWeatherDomain): this(
-            name= domainModel.name,
+        constructor(domainModel: CurrentWeatherDomain) : this(
+            name = domainModel.name,
             tempMax = domainModel.main.tempMax,
             tempMin = domainModel.main.tempMin,
             currentTemp = domainModel.main.temp,
             time = domainModel.dt,
-            status = domainModel.weathersInfo[0].status
+            status = domainModel.weathersInfo[0].status,
+            iconName = domainModel.weathersInfo[0].icon
         )
 
         override val itemViewType: Int
@@ -64,7 +66,8 @@ sealed class HomeForecast: ViewBindingAdapterItem {
     data class HomeForecastInfo(
         val temp: Float,
         val tempMax: Float,
-        val tempMin: Float) {
+        val tempMin: Float
+    ) {
         constructor(domainModel: MainDomain) : this(
             temp = domainModel.temp,
             tempMax = domainModel.tempMax,

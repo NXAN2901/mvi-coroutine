@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="10dp"
     android:paddingBottom="10dp">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -19,18 +18,34 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivCurrentStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvStatus"
+        app:srcCompat="@drawable/ic_cloud_sun" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTempDif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="25\u2103/30\u2103"
         android:textColor="@color/home_header"
-        android:textSize="18sp"
+        android:textSize="28sp"
         android:textStyle="bold"
-        android:typeface="serif"
+        android:typeface="sans"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvStatus" />
+        app:layout_constraintTop_toBottomOf="@+id/ivCurrentStatus" />
+
+    <View
+        android:id="@+id/bottomSpace"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTempDif" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

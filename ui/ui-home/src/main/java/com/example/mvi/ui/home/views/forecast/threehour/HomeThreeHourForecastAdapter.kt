@@ -1,6 +1,11 @@
 package com.example.mvi.ui.home.views.forecast.threehour
 
+import android.util.Log
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.core.utility.toDateFormat
 import com.example.mvi.android.core.adapter.ViewBindingAdapter
 import com.example.mvi.android.core.adapter.ViewBindingHolder
@@ -36,13 +41,18 @@ class HomeForecastVH(binding: ViewHomeForecastThreeHourBinding) :
 
     override fun bind(item: HomeForecast.HomeThreeHourForecast) {
         binding.apply {
+            val context =itemView.context
             tvForecastTempDif.text = String.format(
-                itemView.context.getString(R.string.home_threehour_temp_diff),
+                context.getString(R.string.home_threehour_temp_diff),
                 floor(item.forecastInfo.tempMin).toInt(),
                 ceil(item.forecastInfo.tempMax).toInt()
             )
 
             tvTime.text = item.time.toDateFormat("HH:00")
+            Glide.with(context)
+                .load("http://openweathermap.org/img/w/${item.weatherInfo[0].iconName}.png")
+                .apply(RequestOptions().override(context.resources.getDimensionPixelSize(R.dimen.home_threehour_icon_size)))
+                .into(ivForecast)
         }
     }
 }

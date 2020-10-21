@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="home_header">16sp</dimen>
+    <dimen name="home_threehour_icon_size">64dp</dimen>
+    <dimen name="home_currentweather_status_icon_size">128dp</dimen>
 </resources>

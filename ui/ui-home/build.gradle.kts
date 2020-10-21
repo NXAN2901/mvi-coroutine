@@ -46,4 +46,8 @@ dependencies {
 
     // FLow Binding
     implementation(AppDeps.IO.FlowBinding.MATERIAL)
+
+    // Glide
+    implementation(AppDeps.Github.Glide.GLIDE)
+    annotationProcessor(AppDeps.Github.Glide.PROCESSOR_COMPILER)
 }
