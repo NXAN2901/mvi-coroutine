@@ -2,4 +2,5 @@
 <resources>
     <string name="home_threehour_temp_diff">%d&#176;c/%d&#176;c</string>
     <string name="home_status_current_temp_diff">%d&#176;c/%d&#176;c</string>
+    <string name="home_header_current_temp">%d&#176;</string>
 </resources>

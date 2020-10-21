@@ -4,16 +4,20 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.data.datastore.AppFlagDataStore
 import com.example.core.data.datastore.TutorialFlag
+import com.example.core.utility.toDateFormat
 import com.example.mvi.android.core.binding.viewBinding
 import com.example.mvi.ui.base.BaseFragment
 import com.example.mvi.ui.home.databinding.FragmentHomeBinding
+import com.example.mvi.ui.home.models.HomeForecast
 import com.example.mvi.ui.home.viewmodel.HomeVM
 import com.example.mvi.ui.home.views.forecast.content.HomeContentAdapter
+import kotlinx.android.synthetic.main.home_header_layout.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.ceil
 
 @ExperimentalCoroutinesApi
 @FlowPreview
@@ -63,6 +67,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
     private fun renderUIByViewState(viewState: HomeViewState) {
         binding.apply {
             viewState.forecastItems.let { forecast ->
+                if (forecast.isNotEmpty() && forecast[0] is HomeForecast.CurrentWeather) {
+                    val currentWeather = forecast[0] as HomeForecast.CurrentWeather
+                    appBar.tvCity.text = currentWeather.name
+                    appBar.tvDate.text = currentWeather.time.toDateFormat("yyyy-dd-MM")
+                    appBar.tvTemp.text = String.format(
+                        getString(R.string.home_header_current_temp),
+                        ceil(currentWeather.currentTemp).toInt()
+                    )
+                }
                 (scrollableLayout.rvContent.adapter as HomeContentAdapter).setDataList(forecast)
             }
         }
