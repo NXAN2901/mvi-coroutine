@@ -1,5 +1,6 @@
 package com.example.mvi.ui.home
 
+import android.view.animation.AnimationUtils
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.data.datastore.AppFlagDataStore
@@ -17,6 +18,7 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.ArrayList
 import kotlin.math.ceil
 
 @ExperimentalCoroutinesApi
@@ -41,6 +43,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
                 adapter = HomeContentAdapter(emptyList())
                 layoutManager =
                     LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                layoutAnimation = AnimationUtils.loadLayoutAnimation(
+                    context,
+                    R.anim.home_layout_animation_fall_down
+                )
+                scheduleLayoutAnimation()
             }
         }
         setUpEvent()
@@ -66,9 +73,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
 
     private fun renderUIByViewState(viewState: HomeViewState) {
         binding.apply {
-            viewState.forecastItems.let { forecast ->
-                if (forecast.isNotEmpty() && forecast[0] is HomeForecast.CurrentWeather) {
-                    val currentWeather = forecast[0] as HomeForecast.CurrentWeather
+            viewState.forecastItems.let { forecasts ->
+                if (forecasts.isNotEmpty() && forecasts[0] is HomeForecast.CurrentWeather) {
+                    val currentWeather = forecasts[0] as HomeForecast.CurrentWeather
                     appBar.tvCity.text = currentWeather.name
                     appBar.tvDate.text = currentWeather.time.toDateFormat("yyyy-dd-MM")
                     appBar.tvTemp.text = String.format(
@@ -76,7 +83,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
                         ceil(currentWeather.currentTemp).toInt()
                     )
                 }
-                (scrollableLayout.rvContent.adapter as HomeContentAdapter).setDataList(forecast)
+                (scrollableLayout.rvContent.adapter as HomeContentAdapter).setDataList(forecasts)
             }
         }
     }

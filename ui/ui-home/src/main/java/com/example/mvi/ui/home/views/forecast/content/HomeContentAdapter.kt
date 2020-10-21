@@ -4,6 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.example.mvi.android.core.adapter.ViewBindingAdapterItem
+import com.example.mvi.android.core.adapter.animated.AnimatedAdapter
+import com.example.mvi.android.core.adapter.animated.AnimatedItemHolder
 import com.example.mvi.ui.home.databinding.ItemContentThreehourBinding
 import com.example.mvi.ui.home.databinding.ItemContentWeatherCurrentBinding
 import com.example.mvi.ui.home.models.HomeForecast
@@ -11,14 +14,14 @@ import java.lang.RuntimeException
 
 class HomeContentAdapter(
     private var dataList: List<HomeForecast>
-) : RecyclerView.Adapter<HomeContentVH>() {
+) : AnimatedAdapter<HomeContentVH<HomeForecast, *>>() {
 
     fun setDataList(list: List<HomeForecast>) {
         dataList = list
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeContentVH {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeContentVH<HomeForecast, *> {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             HomeForecastItemViewType.THREE_HOUR.ordinal -> ThreeHourContentVH(
@@ -39,7 +42,7 @@ class HomeContentAdapter(
         }
     }
 
-    override fun onBindViewHolder(holder: HomeContentVH, position: Int) {
+    override fun onBindViewHolder(holder: HomeContentVH<HomeForecast, *>, position: Int) {
         holder.bind(dataList[position])
     }
 
@@ -55,6 +58,6 @@ enum class HomeForecastItemViewType {
     STATUS
 }
 
-abstract class HomeContentVH(binding: ViewBinding) : RecyclerView.ViewHolder(binding.root) {
-    abstract fun bind(homeForecast: HomeForecast)
+abstract class HomeContentVH<T : HomeForecast, V : ViewBinding>(vb: V) :
+    AnimatedItemHolder<T, V>(vb) {
 }

@@ -9,7 +9,7 @@
     tools:showIn="@layout/fragment_home">
 
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.example.mvi.android.core.adapter.animated.AnimatedRecyclerView
         android:id="@+id/rvContent"
         android:layout_width="match_parent"
         android:overScrollMode="never"
