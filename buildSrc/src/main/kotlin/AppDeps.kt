@@ -30,16 +30,19 @@ object AppDeps {
 
         object Navigation {
             private const val VERSION = "2.3.0"
+
             // JAVA
             const val FRAGMENT = "androidx.navigation:navigation-fragment:$VERSION"
             const val UI = "androidx.navigation:navigation-ui:$VERSION"
+
             // Kotlin
             const val FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:$VERSION"
             const val UI_KTX = "androidx.navigation:navigation-ui-ktx:$VERSION"
 
             const val RUNTIME = "androidx.navigation:navigation-runtime:$VERSION"
             const val RUNTIME_KTX = "androidx.navigation:navigation-runtime-ktx:$VERSION"
-            const val DYNAMIC_FEATURES_FRAGMENT = "androidx.navigation:navigation-dynamic-features-fragment:$VERSION"
+            const val DYNAMIC_FEATURES_FRAGMENT =
+                "androidx.navigation:navigation-dynamic-features-fragment:$VERSION"
         }
 
         object Fragment {
@@ -72,7 +75,8 @@ object AppDeps {
 
         object SwipeRefreshLayout {
             private const val VERSION = "1.1.0"
-            const val SWIPE_REFRESH_LAYOUT = "androidx.swiperefreshlayout:swiperefreshlayout:$VERSION"
+            const val SWIPE_REFRESH_LAYOUT =
+                "androidx.swiperefreshlayout:swiperefreshlayout:$VERSION"
         }
     }
 
@@ -129,17 +133,35 @@ object AppDeps {
             private const val VERSION = "1.0.0-alpha04"
             const val CORE = "io.github.reactivecircus.flowbinding:flowbinding-appcompat:$VERSION"
             const val ANDROID = "io.github.reactivecircus.flowbinding:flowbinding-android:$VERSION"
-            const val APPCOMPAT = "io.github.reactivecircus.flowbinding:flowbinding-appcompat:$VERSION"
+            const val APPCOMPAT =
+                "io.github.reactivecircus.flowbinding:flowbinding-appcompat:$VERSION"
             const val ACTIVITY = "io.github.reactivecircus.flowbinding:flowbinding-core:$VERSION"
-            const val DRAWER_LAYOUT = "io.github.reactivecircus.flowbinding:flowbinding-drawerlayout:$VERSION"
-            const val LIFECYCLE = "io.github.reactivecircus.flowbinding:flowbinding-lifecycle:$VERSION"
-            const val NAVIGATION = "io.github.reactivecircus.flowbinding:flowbinding-navigation:$VERSION"
-            const val PREFERENCE = "io.github.reactivecircus.flowbinding:flowbinding-preference:$VERSION"
-            const val RECYCLERVIEW = "io.github.reactivecircus.flowbinding:flowbinding-recyclerview:$VERSION"
-            const val SWIPE_REFRESH_LAYOUT = "io.github.reactivecircus.flowbinding:flowbinding-swiperefreshlayout:$VERSION"
-            const val VIEWPAGER = "io.github.reactivecircus.flowbinding:flowbinding-viewpager:$VERSION"
-            const val VIEWPAGER2 = "io.github.reactivecircus.flowbinding:flowbinding-viewpager2:$VERSION"
-            const val MATERIAL = "io.github.reactivecircus.flowbinding:flowbinding-material:$VERSION"
+            const val DRAWER_LAYOUT =
+                "io.github.reactivecircus.flowbinding:flowbinding-drawerlayout:$VERSION"
+            const val LIFECYCLE =
+                "io.github.reactivecircus.flowbinding:flowbinding-lifecycle:$VERSION"
+            const val NAVIGATION =
+                "io.github.reactivecircus.flowbinding:flowbinding-navigation:$VERSION"
+            const val PREFERENCE =
+                "io.github.reactivecircus.flowbinding:flowbinding-preference:$VERSION"
+            const val RECYCLERVIEW =
+                "io.github.reactivecircus.flowbinding:flowbinding-recyclerview:$VERSION"
+            const val SWIPE_REFRESH_LAYOUT =
+                "io.github.reactivecircus.flowbinding:flowbinding-swiperefreshlayout:$VERSION"
+            const val VIEWPAGER =
+                "io.github.reactivecircus.flowbinding:flowbinding-viewpager:$VERSION"
+            const val VIEWPAGER2 =
+                "io.github.reactivecircus.flowbinding:flowbinding-viewpager2:$VERSION"
+            const val MATERIAL =
+                "io.github.reactivecircus.flowbinding:flowbinding-material:$VERSION"
+        }
+    }
+
+    object Github {
+        object Glide {
+            private const val VERSION = "4.11.0"
+            const val GLIDE = "com.github.bumptech.glide:glide:$VERSION"
+            const val PROCESSOR_COMPILER = "com.github.bumptech.glide:compiler:$VERSION"
         }
     }
 }
