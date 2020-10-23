@@ -18,7 +18,7 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.ArrayList
+import reactivecircus.flowbinding.android.view.clicks
 import kotlin.math.ceil
 
 @ExperimentalCoroutinesApi
@@ -29,9 +29,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
     private val binding by viewBinding(FragmentHomeBinding::bind)
     private val appFlagDataStore: AppFlagDataStore by inject()
 
-    private val viewIntents = merge(
-        flowOf(HomeViewIntent.Initial)
-    )
+    private val viewIntents by lazy {
+        merge(
+            flowOf(HomeViewIntent.Initial),
+            binding.header.ivRefresh
+                .clicks()
+                .map { HomeViewIntent.Refresh }
+        )
+    }
 
     override fun getViewBinding(): FragmentHomeBinding = binding
 

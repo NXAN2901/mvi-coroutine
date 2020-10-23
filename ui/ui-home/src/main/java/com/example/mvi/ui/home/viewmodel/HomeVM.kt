@@ -10,6 +10,7 @@ import com.example.mvi.ui.home.HomeViewState
 import com.example.mvi.ui.home.models.HomeForecast
 import com.example.mvi.usecase.weather.FetchCurrentWeatherUseCase
 import com.example.mvi.usecase.weather.FetchForecastUseCase
+import com.example.mvi.usecase.weather.RefreshCurrentWeatherUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
@@ -20,19 +21,23 @@ import kotlinx.coroutines.flow.*
 class HomeVM(
     application: Application,
     private val fetchForecastUseCase: FetchForecastUseCase,
-    private val fetchCurrentWeatherUseCase: FetchCurrentWeatherUseCase
+    private val fetchCurrentWeatherUseCase: FetchCurrentWeatherUseCase,
+    private val refreshCurrentWeatherUseCase: RefreshCurrentWeatherUseCase
 ) : BaseViewModel(application) {
 
     private val _intentChannel = ConflatedBroadcastChannel<HomeViewIntent>()
 
     val viewState: StateFlow<HomeViewState>
 
-
     init {
         val initialVS = HomeViewState.initial()
         viewState = MutableStateFlow(initialVS)
         _intentChannel.asFlow()
-            .distinctUntilChanged()
+            .distinctUntilChanged { old, new ->
+                if (new is HomeViewIntent.Refresh) {
+                    false
+                } else old == new
+            }
             .toPartialChange()
             .scan(initialVS) { vs, change -> change.reduce(vs) }
             .onEach {
@@ -50,7 +55,11 @@ class HomeVM(
             )
                 .scan(ArrayList<HomeForecast>()) { acc, change ->
                     if (change is HomeForecast.CurrentWeather) {
-                        acc.add(0, change)
+                        if (acc.isNotEmpty() && acc.first() is HomeForecast.CurrentWeather) {
+                            acc[0] = change
+                        } else {
+                            acc.add(0, change)
+                        }
                     } else {
                         acc.add(change)
                     }
@@ -60,15 +69,27 @@ class HomeVM(
                 .onStart { emit(HomePartialChange.GetForecast.Loading) }
                 .catch { emit(HomePartialChange.GetForecast.Error(it)) }
 
+        val refreshCurrentWeatherFlow = refreshCurrentWeather()
+            .onStart { emit(HomePartialChange.GetForecast.Loading) }
+            .catch { emit(HomePartialChange.GetForecast.Error(it)) }
 
         return merge(
             filterIsInstance<HomeViewIntent.Initial>()
                 .logIntent()
-                .flatMapConcat { homeWeatherFlow }
+                .flatMapConcat { homeWeatherFlow },
+            filterIsInstance<HomeViewIntent.Refresh>()
+                .filter { viewState.value.let { !it.isLoading && it.error == null } }
+                .flatMapConcat { refreshCurrentWeatherFlow }
         )
     }
 
     suspend fun processIntent(intent: HomeViewIntent) = _intentChannel.send(intent)
+
+    private fun refreshCurrentWeather() = flow<HomePartialChange> {
+        refreshCurrentWeatherUseCase(
+            RefreshCurrentWeatherUseCase.Params("Thanh pho Ho Chi Minh,vn")
+        )
+    }
 
     private fun fetchForecasts() = flow {
         fetchForecastUseCase(FetchForecastUseCase.Params("Thanh pho Ho Chi Minh,vn"))
@@ -76,7 +97,6 @@ class HomeVM(
                 emit(HomeForecast.ThreeHour(it.getOrThrow()))
             }.collect()
     }
-
 
     private fun fetchCurrentWeather() = flow {
         fetchCurrentWeatherUseCase(FetchCurrentWeatherUseCase.Params(city = "Thanh pho Ho Chi Minh,vn"))

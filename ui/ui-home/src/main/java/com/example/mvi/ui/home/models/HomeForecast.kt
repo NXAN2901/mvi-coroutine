@@ -39,7 +39,7 @@ sealed class HomeForecast : ViewBindingAdapterItem {
             tempMin = domainModel.main.tempMin,
             currentTemp = domainModel.main.temp,
             time = domainModel.dt,
-            status = domainModel.weathersInfo[0].status,
+            status = domainModel.weathersInfo[0].description,
             iconName = domainModel.weathersInfo[0].icon
         )
 

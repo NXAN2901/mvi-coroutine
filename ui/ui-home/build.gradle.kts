@@ -49,5 +49,8 @@ dependencies {
 
     // Glide
     implementation(AppDeps.Github.Glide.GLIDE)
-    annotationProcessor(AppDeps.Github.Glide.PROCESSOR_COMPILER)
+    kapt(AppDeps.Github.Glide.PROCESSOR_COMPILER)
+
+    // Binding
+    implementation(AppDeps.IO.FlowBinding.ANDROID)
 }
