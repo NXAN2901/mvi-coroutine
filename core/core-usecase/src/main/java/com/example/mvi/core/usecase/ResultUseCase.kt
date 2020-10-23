@@ -4,9 +4,7 @@ import com.example.mvi.core.result.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
-abstract class ResultUseCase<Type, in Params> where Type : Any {
-
-    protected abstract val workDispatcher: CoroutineDispatcher
+abstract class ResultUseCase<Type, in Params>(protected val workDispatcher: CoroutineDispatcher) where Type : Any {
 
     abstract suspend fun run(params: Params): Result<Type>
 
