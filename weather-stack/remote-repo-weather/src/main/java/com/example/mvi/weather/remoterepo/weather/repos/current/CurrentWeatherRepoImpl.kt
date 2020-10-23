@@ -1,5 +1,6 @@
 package com.example.mvi.weather.remoterepo.weather.repos.current
 
+import android.util.Log
 import com.example.mvi.core.domain.Mapper
 import com.example.mvi.core.domain.entity.current.CurrentWeatherDomain
 import com.example.mvi.coredispatchers.CoroutineDispatchers
@@ -22,7 +23,7 @@ class CurrentWeatherRepoImpl(
     private val _chaneChannel = ConflatedBroadcastChannel<Change>()
 
     private sealed class Change {
-        data class Refreshed(val currentWeather: CurrentWeatherDomain): Change()
+        data class Refreshed(val currentWeather: CurrentWeatherDomain) : Change()
     }
 
     private suspend fun fetchCurrentWeatherByCity(
@@ -48,8 +49,13 @@ class CurrentWeatherRepoImpl(
                     is Change.Refreshed -> value.currentWeather
                 }
             }
-            .onEach { emit(it)  }
-            .catch {  }
+            .onEach { emit(it) }
+            .catch { }
             .collect()
     }
+
+    override suspend fun refreshCurrentWeather(city: String, appId: String, units: String?) =
+        fetchCurrentWeatherByCity(city, appId, units).let {
+            _chaneChannel.send(Change.Refreshed(it))
+        }
 }
