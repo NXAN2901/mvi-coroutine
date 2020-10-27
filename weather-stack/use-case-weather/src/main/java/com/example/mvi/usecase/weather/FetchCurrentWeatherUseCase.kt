@@ -12,17 +12,17 @@ import kotlinx.coroutines.flow.*
 @ExperimentalCoroutinesApi
 @FlowPreview
 class FetchCurrentWeatherUseCase(
-    private val coroutineDispatchers: CoroutineDispatchers,
-    private val currentWeatherRepo: CurrentWeatherRepo
+    coroutineDispatchers: CoroutineDispatchers,
+    private val currentWeatherRepo: CurrentWeatherRepo,
+    private val appId: String,
 ) : FlowUseCase<FetchCurrentWeatherUseCase.Params, CurrentWeatherDomain>(coroutineDispatchers.io) {
     data class Params(val city: String)
 
     override fun execute(params: Params): Flow<Result<CurrentWeatherDomain>> {
-
         return flow {
             currentWeatherRepo.getCurrentWeather(
                 city = params.city,
-                appId = "9fbcd9f15fe6eb070ff628be464279e5",
+                appId = appId,
                 units = "metric"
             )
                 .onEach { emit(Result.Success(data = it)) }

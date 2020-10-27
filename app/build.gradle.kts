@@ -5,7 +5,14 @@ plugins {
     id("androidx.navigation.safeargs")
 }
 
+val appId: String by project
+val openWeatherUrl: String by project
+
 android {
+    defaultConfig {
+        buildConfigField("String", "APP_ID", "\"${appId}\"")
+        buildConfigField("String", "WEATHER_BASE_URL", "\"${openWeatherUrl}\"")
+    }
     buildTypes {
         getByName("debug") {
             isTestCoverageEnabled = true

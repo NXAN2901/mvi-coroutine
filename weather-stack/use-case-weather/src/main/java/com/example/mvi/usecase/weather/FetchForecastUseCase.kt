@@ -13,7 +13,8 @@ import kotlinx.coroutines.flow.*
 @FlowPreview
 class FetchForecastUseCase(
     private val coroutineDispatchers: CoroutineDispatchers,
-    private val threeHourWeatherRepo: FiveDaysThreeHourWeatherRepo
+    private val threeHourWeatherRepo: FiveDaysThreeHourWeatherRepo,
+    private val appId: String,
 ) : FlowUseCase<FetchForecastUseCase.Params, FiveDayForecastDomain>(coroutineDispatchers.io) {
     data class Params(val city: String)
 
@@ -21,7 +22,7 @@ class FetchForecastUseCase(
         return flow {
             threeHourWeatherRepo.getFiveDayForecast(
                 city = params.city,
-                appId = "9fbcd9f15fe6eb070ff628be464279e5",
+                appId = appId,
                 units = "metric"
             )
                 .onEach { emit(Result.Success(data = it)) }

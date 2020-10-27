@@ -6,14 +6,15 @@ import com.example.mvi.weather.remoterepo.weather.repos.current.CurrentWeatherRe
 
 class RefreshCurrentWeatherUseCase(
     dispatchers: CoroutineDispatchers,
-    private val currentWeatherRepo: CurrentWeatherRepo
+    private val currentWeatherRepo: CurrentWeatherRepo,
+    private val appId: String,
 ) : NoResultUseCase<RefreshCurrentWeatherUseCase.Params>(dispatchers.io) {
 
     data class Params(val city: String)
 
     override suspend fun execute(params: Params) = currentWeatherRepo.refreshCurrentWeather(
         params.city,
-        appId = "9fbcd9f15fe6eb070ff628be464279e5",
+        appId = appId,
         units = "metric"
     )
 }
