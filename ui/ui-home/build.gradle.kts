@@ -28,6 +28,8 @@ dependencies {
     implementation(coreModule("data"))
     implementation(coreModule("utility"))
 
+    implementation(AppDeps.Arch.WorkManager.WORK_KTX)
+
     // ViewModel + LiveData
     implementation(AppDeps.AndroidX.LifeCycle.LIVEDATA_CORE)
     implementation(AppDeps.AndroidX.LifeCycle.RUNTIME_KTX)

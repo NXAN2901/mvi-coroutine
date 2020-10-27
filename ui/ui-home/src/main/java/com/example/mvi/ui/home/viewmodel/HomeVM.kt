@@ -3,6 +3,8 @@ package com.example.mvi.ui.home.viewmodel
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.viewModelScope
+import androidx.work.*
+import com.example.core.data.workmanager.ScheduleRefreshCurrentWeather
 import com.example.mvi.ui.base.BaseViewModel
 import com.example.mvi.ui.home.HomePartialChange
 import com.example.mvi.ui.home.HomeViewIntent
@@ -15,6 +17,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.*
+import java.util.concurrent.TimeUnit
 
 @FlowPreview
 @ExperimentalCoroutinesApi
@@ -45,6 +48,26 @@ class HomeVM(
             }
             .catch { Log.e("ANNX", "Error $it") }
             .launchIn(viewModelScope)
+
+        val schedule: WorkRequest = PeriodicWorkRequestBuilder<ScheduleRefreshCurrentWeather>(
+            15,
+            TimeUnit.MINUTES,
+        )
+            .addTag(SCHEDULE_WORKER_TAG)
+            .setConstraints(
+                Constraints.Builder()
+                    .setRequiredNetworkType(NetworkType.CONNECTED)
+                    .build()
+            )
+            .build()
+
+        WorkManager.getInstance(application)
+            .enqueue(schedule)
+    }
+
+    override fun onCleared() {
+        WorkManager.getInstance(getApplication()).cancelAllWorkByTag(SCHEDULE_WORKER_TAG)
+        super.onCleared()
     }
 
     private fun Flow<HomeViewIntent>.toPartialChange(): Flow<HomePartialChange> {
@@ -108,4 +131,7 @@ class HomeVM(
     private fun <T : HomeViewIntent> Flow<T>.logIntent() =
         onEach { Log.d(HomeVM::class.simpleName, ">>> Intent: $it") }
 
+    companion object {
+        private const val SCHEDULE_WORKER_TAG = "Schedule"
+    }
 }
