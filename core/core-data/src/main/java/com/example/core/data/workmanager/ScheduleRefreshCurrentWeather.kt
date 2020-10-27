@@ -13,7 +13,7 @@ class ScheduleRefreshCurrentWeather(val context: Context, params: WorkerParamete
     CoroutineWorker(context, params), KoinComponent {
 
     private val currentWeatherRepo: CurrentWeatherRepo by inject()
-    private val appId: String by inject(named("AppId"))
+    private val appId: String by inject(named("appId"))
 
     override suspend fun doWork(): Result = coroutineScope {
         currentWeatherRepo.refreshCurrentWeather(
