@@ -164,4 +164,13 @@ object AppDeps {
             const val PROCESSOR_COMPILER = "com.github.bumptech.glide:compiler:$VERSION"
         }
     }
+
+    object Arch {
+        object WorkManager {
+            private const val VERSION = SharedVersions.Arch.WorkManager.VERSION
+            const val WORK_JAVA ="androidx.work:work-runtime:$VERSION"
+            const val WORK_KTX ="androidx.work:work-runtime-ktx:$VERSION"
+            const val WORK_RXJAVA ="androidx.work:work-rxjava2:$VERSION"
+        }
+    }
 }

@@ -12,4 +12,10 @@ object SharedVersions {
     object Hilt {
         const val CORE = "2.28.1-alpha"
     }
+
+    object Arch {
+        object WorkManager {
+            const val VERSION = "2.4.0"
+        }
+    }
 }

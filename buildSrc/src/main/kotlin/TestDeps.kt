@@ -18,4 +18,11 @@ object TestDeps {
         }
     }
 
+    object Arch {
+        object WorkManager {
+            private const val VERSION = SharedVersions.Arch.WorkManager.VERSION
+            const val TEST = "androidx.work:work-testing:$VERSION"
+        }
+    }
+
 }
