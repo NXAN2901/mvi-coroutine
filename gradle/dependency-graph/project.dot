@@ -39,6 +39,7 @@ digraph {
   ":android-core:android-core-datastore" -> ":android-core:android-core-datastore"
   ":core:core-data" -> ":android-core:android-core-datastore"
   ":core:core-data" -> ":core:core-data"
+  ":core:core-data" -> ":weather-stack:use-case-weather" [style=dotted]
   ":core:core-dispatchers" -> ":core:core-dispatchers"
   ":core:core-domain" -> ":core:core-dispatchers"
   ":core:core-domain" -> ":core:core-domain"
