@@ -15,6 +15,9 @@ jobs:
 
         - name: Setup Graphviz
           uses: ts-graphviz/setup-graphviz@v1
+          
+        - name: Make gradlew executable
+          run: chmod +x ./gradlew
 
         - name: Generate Dependency Graph
           run: ./gradlew projectDependencyGraph
