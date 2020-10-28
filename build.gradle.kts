@@ -9,3 +9,5 @@ allprojects {
 tasks.register<Delete>("clean") {
     delete(buildDir)
 }
+
+apply(from = "gradle/projectDependencyGraph.gradle")
