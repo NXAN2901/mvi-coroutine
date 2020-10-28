@@ -61,8 +61,19 @@ class FiveDaysThreeHourWeatherRepoImpl(
                 }
             }
             .onEach { emit(it) }
-            .catch {  }
+            .catch { }
             .collect()
+    }
+
+    override suspend fun refreshThreeHourForecast(
+        city: String,
+        appId: String,
+        cnt: String?,
+        mode: String?,
+        units: String?,
+        language: String?
+    ) = fetchForecast5DayByCity(city, appId, cnt, mode, units, language).let {
+        _changeChannel.send(Change.Refreshed(it))
     }
 
 }

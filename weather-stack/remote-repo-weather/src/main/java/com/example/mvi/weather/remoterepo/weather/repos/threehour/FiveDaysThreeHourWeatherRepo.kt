@@ -11,4 +11,13 @@ interface FiveDaysThreeHourWeatherRepo {
                            mode: String? = "json",
                            units: String? = "metric",
                            language: String? = "en"): Flow<FiveDayForecastDomain>
+
+    suspend fun refreshThreeHourForecast(
+        city: String,
+        appId: String,
+        cnt: String? = null,
+        mode: String? = "json",
+        units: String? = "metric",
+        language: String? = "en"
+    )
 }
