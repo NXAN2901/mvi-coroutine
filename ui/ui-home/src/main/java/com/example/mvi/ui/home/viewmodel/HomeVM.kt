@@ -13,6 +13,7 @@ import com.example.mvi.ui.home.models.HomeForecast
 import com.example.mvi.usecase.weather.FetchCurrentWeatherUseCase
 import com.example.mvi.usecase.weather.FetchForecastUseCase
 import com.example.mvi.usecase.weather.RefreshCurrentWeatherUseCase
+import com.example.mvi.usecase.weather.RefreshForecastUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
@@ -25,7 +26,8 @@ class HomeVM(
     application: Application,
     private val fetchForecastUseCase: FetchForecastUseCase,
     private val fetchCurrentWeatherUseCase: FetchCurrentWeatherUseCase,
-    private val refreshCurrentWeatherUseCase: RefreshCurrentWeatherUseCase
+    private val refreshCurrentWeatherUseCase: RefreshCurrentWeatherUseCase,
+    private val refreshForecastUseCase: RefreshForecastUseCase,
 ) : BaseViewModel(application) {
 
     private val _intentChannel = ConflatedBroadcastChannel<HomeViewIntent>()
@@ -50,7 +52,7 @@ class HomeVM(
             .launchIn(viewModelScope)
 
         val schedule: WorkRequest = PeriodicWorkRequestBuilder<ScheduleRefreshCurrentWeather>(
-            15,
+            SCHEDULE_REPEAT_INTERVAL,
             TimeUnit.MINUTES,
         )
             .addTag(SCHEDULE_WORKER_TAG)
@@ -84,7 +86,11 @@ class HomeVM(
                             acc.add(0, change)
                         }
                     } else {
-                        acc.add(change)
+                        if (acc.size > 1) {
+                            acc[1] = change
+                        } else {
+                            acc.add(change)
+                        }
                     }
                     acc
                 }
@@ -112,6 +118,10 @@ class HomeVM(
         refreshCurrentWeatherUseCase(
             RefreshCurrentWeatherUseCase.Params("Thanh pho Ho Chi Minh,vn")
         )
+
+        refreshForecastUseCase(
+            RefreshForecastUseCase.Params(city = "Thanh pho Ho Chi Minh,vn")
+        )
     }
 
     private fun fetchForecasts() = flow {
@@ -133,5 +143,6 @@ class HomeVM(
 
     companion object {
         private const val SCHEDULE_WORKER_TAG = "Schedule"
+        private const val SCHEDULE_REPEAT_INTERVAL = 15L
     }
 }
