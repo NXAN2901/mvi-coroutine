@@ -88,7 +88,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
                         ceil(currentWeather.currentTemp).toInt()
                     )
                 }
-                (scrollableLayout.rvContent.adapter as HomeContentAdapter).setDataList(forecasts)
+                scrollableLayout.rvContent.apply {
+                    (adapter as HomeContentAdapter).setDataList(forecasts)
+                    scheduleLayoutAnimation()
+                }
             }
         }
     }
