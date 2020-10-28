@@ -9,4 +9,4 @@ MVI playground project using:
 
 # Gradle Dependencies Graph
 
-<center> ![](gradle/dependency-graph/project.dot.png) </center>
+![](gradle/dependency-graph/project.dot.png)
