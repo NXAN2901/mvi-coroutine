@@ -1,0 +1,75 @@
+digraph {
+  graph [label="MVIWeather\n ",labelloc=t,fontsize=30,ranksep=1.4];
+  node [style=filled, fillcolor="#bbbbbb"];
+  rankdir=TB;
+
+  # Projects
+
+  ":android-core:android-core-adapter" [fillcolor="#baffc9"];
+  ":android-core:android-core-binding" [fillcolor="#baffc9"];
+  ":android-core:android-core-datastore" [fillcolor="#baffc9"];
+  ":app" [fillcolor="#baffc9"];
+  ":core:core-data" [fillcolor="#baffc9"];
+  ":core:core-dispatchers" [fillcolor="#baffc9"];
+  ":core:core-domain" [fillcolor="#baffc9"];
+  ":core:core-result" [fillcolor="#baffc9"];
+  ":core:core-usecase" [fillcolor="#baffc9"];
+  ":core:core-utility" [fillcolor="#baffc9"];
+  ":ui:ui-base" [fillcolor="#baffc9"];
+  ":ui:ui-home" [fillcolor="#baffc9"];
+  ":ui:ui-intro" [fillcolor="#baffc9"];
+  ":ui:ui-splash" [fillcolor="#baffc9"];
+  ":weather-stack:remote-repo-weather" [fillcolor="#baffc9"];
+  ":weather-stack:use-case-weather" [fillcolor="#baffc9"];
+
+  {rank = same;}
+
+  # Dependencies
+
+  ":app" -> ":app"
+  ":app" -> ":ui:ui-splash" [style=dotted]
+  ":app" -> ":ui:ui-intro" [style=dotted]
+  ":app" -> ":ui:ui-home" [style=dotted]
+  ":app" -> ":weather-stack:remote-repo-weather" [style=dotted]
+  ":app" -> ":core:core-dispatchers" [style=dotted]
+  ":app" -> ":core:core-data" [style=dotted]
+  ":app" -> ":weather-stack:use-case-weather" [style=dotted]
+  ":android-core:android-core-adapter" -> ":android-core:android-core-adapter"
+  ":android-core:android-core-binding" -> ":android-core:android-core-binding"
+  ":android-core:android-core-datastore" -> ":android-core:android-core-datastore"
+  ":core:core-data" -> ":android-core:android-core-datastore"
+  ":core:core-data" -> ":core:core-data"
+  ":core:core-dispatchers" -> ":core:core-dispatchers"
+  ":core:core-domain" -> ":core:core-dispatchers"
+  ":core:core-domain" -> ":core:core-domain"
+  ":core:core-result" -> ":core:core-result"
+  ":core:core-usecase" -> ":core:core-usecase"
+  ":core:core-usecase" -> ":core:core-result" [style=dotted]
+  ":core:core-utility" -> ":core:core-utility"
+  ":ui:ui-base" -> ":ui:ui-base"
+  ":ui:ui-base" -> ":android-core:android-core-binding" [style=dotted]
+  ":ui:ui-home" -> ":ui:ui-home"
+  ":ui:ui-home" -> ":ui:ui-base" [style=dotted]
+  ":ui:ui-home" -> ":android-core:android-core-binding" [style=dotted]
+  ":ui:ui-home" -> ":android-core:android-core-adapter" [style=dotted]
+  ":ui:ui-home" -> ":weather-stack:use-case-weather" [style=dotted]
+  ":ui:ui-home" -> ":core:core-result" [style=dotted]
+  ":ui:ui-home" -> ":core:core-data" [style=dotted]
+  ":ui:ui-home" -> ":core:core-utility" [style=dotted]
+  ":ui:ui-intro" -> ":ui:ui-intro"
+  ":ui:ui-intro" -> ":ui:ui-base" [style=dotted]
+  ":ui:ui-intro" -> ":android-core:android-core-binding" [style=dotted]
+  ":ui:ui-intro" -> ":android-core:android-core-adapter" [style=dotted]
+  ":ui:ui-splash" -> ":ui:ui-splash"
+  ":ui:ui-splash" -> ":ui:ui-base" [style=dotted]
+  ":ui:ui-splash" -> ":android-core:android-core-binding" [style=dotted]
+  ":ui:ui-splash" -> ":core:core-data" [style=dotted]
+  ":weather-stack:remote-repo-weather" -> ":weather-stack:remote-repo-weather"
+  ":weather-stack:remote-repo-weather" -> ":core:core-domain" [style=dotted]
+  ":weather-stack:use-case-weather" -> ":core:core-domain"
+  ":weather-stack:use-case-weather" -> ":core:core-dispatchers"
+  ":weather-stack:use-case-weather" -> ":core:core-usecase"
+  ":weather-stack:use-case-weather" -> ":core:core-result"
+  ":weather-stack:use-case-weather" -> ":weather-stack:remote-repo-weather"
+  ":weather-stack:use-case-weather" -> ":weather-stack:use-case-weather"
+}
