@@ -2,11 +2,7 @@ package com.example.mvi.ui.home.views.forecast.content
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
-import com.example.mvi.android.core.adapter.ViewBindingAdapterItem
 import com.example.mvi.android.core.adapter.animated.AnimatedAdapter
-import com.example.mvi.android.core.adapter.animated.AnimatedItemHolder
 import com.example.mvi.ui.home.databinding.ItemContentThreehourBinding
 import com.example.mvi.ui.home.databinding.ItemContentWeatherCurrentBinding
 import com.example.mvi.ui.home.models.HomeForecast
@@ -21,7 +17,10 @@ class HomeContentAdapter(
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeContentVH<HomeForecast, *> {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): HomeContentVH<HomeForecast, *> {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             HomeForecastItemViewType.THREE_HOUR.ordinal -> ThreeHourContentVH(
@@ -56,8 +55,4 @@ class HomeContentAdapter(
 enum class HomeForecastItemViewType {
     THREE_HOUR,
     STATUS
-}
-
-abstract class HomeContentVH<T : HomeForecast, V : ViewBinding>(vb: V) :
-    AnimatedItemHolder<T, V>(vb) {
 }
