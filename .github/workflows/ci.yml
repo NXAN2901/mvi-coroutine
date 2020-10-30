@@ -18,6 +18,11 @@ jobs:
           
         - name: Make gradlew executable
           run: chmod +x ./gradlew
+          
+        - name: Decode secrets.properties file
+          env:
+            SECRETS_PROPERTIES: ${{ secrets.WEATHER_APPID }}
+          run: echo "$WEATHER_APPID" | base64 -d > ./secrets.properties
 
         - name: Generate Dependency Graph
           run: ./gradlew projectDependencyGraph
