@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("com.android.application")
     id("app-plugins")
@@ -5,12 +8,16 @@ plugins {
     id("androidx.navigation.safeargs")
 }
 
-val appId: String by project
 val openWeatherUrl: String by project
+// Secret properties file contains some secrets key (ex: AppID for OpenWeatherAPI ...)
+// Change secretsProperties["APP_ID"] with your OpenWeatherAPI AppID
+val secretsPropertiesFile = rootProject.file("secrets.properties")
+val secretsProperties = Properties()
+secretsProperties.load(FileInputStream(secretsPropertiesFile))
 
 android {
     defaultConfig {
-        buildConfigField("String", "APP_ID", "\"${appId}\"")
+        buildConfigField("String", "APP_ID", "\"${secretsProperties["APP_ID"]}\"")
         buildConfigField("String", "WEATHER_BASE_URL", "\"${openWeatherUrl}\"")
     }
     buildTypes {
