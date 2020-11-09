@@ -1,10 +1,9 @@
 package com.example.mvi.ui.splash
 
-import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.core.data.datastore.TutorialFlag
 import com.example.mvi.android.core.binding.viewBinding
+import com.example.mvi.data.datastore.AppPreferences
 import com.example.mvi.ui.base.BaseFragment
 import com.example.mvi.ui.splash.databinding.FragmentSplashBinding
 import com.example.mvi.ui.splash.viewmodel.SplashVM
@@ -45,7 +44,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashVM>(R.layout.fr
     private fun renderUiByViewState(viewState: SplashViewState) {
         binding.run {
             viewState.tutorialFlag?.let { flag ->
-                if (flag == TutorialFlag.NOT_PASSED) {
+                if (flag == AppPreferences.AppState.UNSPECIFIED || flag == AppPreferences.AppState.INITIALIZATION) {
                     findNavController().navigate(R.id.splashToIntro)
                     return
                 }

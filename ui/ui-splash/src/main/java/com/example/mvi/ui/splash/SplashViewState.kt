@@ -1,10 +1,10 @@
 package com.example.mvi.ui.splash
 
-import com.example.core.data.datastore.TutorialFlag
+import com.example.mvi.data.datastore.AppPreferences
 
 data class SplashViewState(
     val isLoading: Boolean,
-    val tutorialFlag: TutorialFlag?
+    val tutorialFlag: AppPreferences.AppState?
 ) {
 
     companion object {
@@ -18,16 +18,16 @@ data class SplashViewState(
 sealed class SplashPartialChange {
     abstract fun reduce(viewState: SplashViewState): SplashViewState
 
-    sealed class GetTutorialFlag : SplashPartialChange() {
+    sealed class GetAppState : SplashPartialChange() {
         override fun reduce(viewState: SplashViewState): SplashViewState {
             return when (this) {
                 Loading -> viewState.copy(isLoading = true, tutorialFlag = null)
-                is Data -> viewState.copy(isLoading = false, tutorialFlag = flag)
+                is Data -> viewState.copy(isLoading = false, tutorialFlag = appState)
             }
         }
 
-        object Loading : GetTutorialFlag()
-        data class Data(val flag: TutorialFlag): GetTutorialFlag()
+        object Loading : GetAppState()
+        data class Data(val appState: AppPreferences.AppState) : GetAppState()
     }
 
 }

@@ -3,8 +3,6 @@ package com.example.mvi.ui.home
 import android.view.animation.AnimationUtils
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.core.data.datastore.AppFlagDataStore
-import com.example.core.data.datastore.TutorialFlag
 import com.example.core.utility.toDateFormat
 import com.example.mvi.android.core.binding.viewBinding
 import com.example.mvi.ui.base.BaseFragment
@@ -16,7 +14,6 @@ import kotlinx.android.synthetic.main.home_header_layout.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import reactivecircus.flowbinding.android.view.clicks
 import kotlin.math.ceil
@@ -27,7 +24,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
 
     private val homeVM: HomeVM by viewModel()
     private val binding by viewBinding(FragmentHomeBinding::bind)
-    private val appFlagDataStore: AppFlagDataStore by inject()
 
     private val viewIntents by lazy {
         merge(
@@ -59,10 +55,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
     }
 
     private fun setUpEvent() {
-        lifecycleScope.launchWhenCreated {
-            appFlagDataStore.setTutorialFlag(TutorialFlag.PASSED)
-        }
-
         lifecycleScope.launchWhenStarted {
             getViewModel().viewState.onEach {
                 renderUIByViewState(it)

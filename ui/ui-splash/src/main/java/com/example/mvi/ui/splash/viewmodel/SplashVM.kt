@@ -2,7 +2,7 @@ package com.example.mvi.ui.splash.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.viewModelScope
-import com.example.core.data.datastore.AppFlagDataStore
+import com.example.core.data.usecase.GetAppStateUseCase
 import com.example.mvi.ui.base.BaseViewModel
 import com.example.mvi.ui.splash.SplashPartialChange
 import com.example.mvi.ui.splash.SplashViewIntent
@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.*
 @ExperimentalCoroutinesApi
 class SplashVM(
     application: Application,
-    private val appFlagDataStore: AppFlagDataStore
+    private val getAppStateUseCase: GetAppStateUseCase,
 ) : BaseViewModel(application) {
 
     private val _intentChannel = ConflatedBroadcastChannel<SplashViewIntent>()
@@ -38,10 +38,10 @@ class SplashVM(
     }
 
     private fun Flow<SplashViewIntent>.toPartialChange(): Flow<SplashPartialChange> {
-        val tutorialFlagFlow = appFlagDataStore.tutorialFlagFlow
+        val tutorialFlagFlow = getAppStateUseCase(Unit)
             .debounce(SPLASH_DURATION)
-            .map { SplashPartialChange.GetTutorialFlag.Data(it) as SplashPartialChange.GetTutorialFlag }
-            .onStart { emit(SplashPartialChange.GetTutorialFlag.Loading) }
+            .map { SplashPartialChange.GetAppState.Data(it.getOrThrow()) as SplashPartialChange.GetAppState }
+            .onStart { emit(SplashPartialChange.GetAppState.Loading) }
             .catch { }
 
         return merge(

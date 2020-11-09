@@ -4,7 +4,9 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import androidx.work.*
+import com.example.core.data.usecase.UpdateAppStateUseCase
 import com.example.core.data.workmanager.ScheduleRefreshCurrentWeather
+import com.example.mvi.data.datastore.AppPreferences
 import com.example.mvi.ui.base.BaseViewModel
 import com.example.mvi.ui.home.HomePartialChange
 import com.example.mvi.ui.home.HomeViewIntent
@@ -18,6 +20,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 @FlowPreview
@@ -28,6 +31,7 @@ class HomeVM(
     private val fetchCurrentWeatherUseCase: FetchCurrentWeatherUseCase,
     private val refreshCurrentWeatherUseCase: RefreshCurrentWeatherUseCase,
     private val refreshForecastUseCase: RefreshForecastUseCase,
+    private val updateAppStateUseCase: UpdateAppStateUseCase,
 ) : BaseViewModel(application) {
 
     private val _intentChannel = ConflatedBroadcastChannel<HomeViewIntent>()
@@ -65,6 +69,10 @@ class HomeVM(
 
         WorkManager.getInstance(application)
             .enqueue(schedule)
+
+        viewModelScope.launch {
+            updateAppStateUseCase(UpdateAppStateUseCase.Params(AppPreferences.AppState.SIGNED_IN))
+        }
     }
 
     override fun onCleared() {
