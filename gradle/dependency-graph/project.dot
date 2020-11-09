@@ -38,33 +38,34 @@ digraph {
   ":android-core:android-core-binding" -> ":android-core:android-core-binding"
   ":android-core:android-core-datastore" -> ":android-core:android-core-datastore"
   ":core:core-data" -> ":android-core:android-core-datastore"
+  ":core:core-data" -> ":core:core-usecase"
   ":core:core-data" -> ":core:core-data"
   ":core:core-data" -> ":weather-stack:use-case-weather" [style=dotted]
   ":core:core-dispatchers" -> ":core:core-dispatchers"
   ":core:core-domain" -> ":core:core-dispatchers"
   ":core:core-domain" -> ":core:core-domain"
   ":core:core-result" -> ":core:core-result"
+  ":core:core-usecase" -> ":core:core-result"
   ":core:core-usecase" -> ":core:core-usecase"
-  ":core:core-usecase" -> ":core:core-result" [style=dotted]
   ":core:core-utility" -> ":core:core-utility"
   ":ui:ui-base" -> ":ui:ui-base"
   ":ui:ui-base" -> ":android-core:android-core-binding" [style=dotted]
+  ":ui:ui-home" -> ":core:core-data"
   ":ui:ui-home" -> ":ui:ui-home"
   ":ui:ui-home" -> ":ui:ui-base" [style=dotted]
   ":ui:ui-home" -> ":android-core:android-core-binding" [style=dotted]
   ":ui:ui-home" -> ":android-core:android-core-adapter" [style=dotted]
   ":ui:ui-home" -> ":weather-stack:use-case-weather" [style=dotted]
   ":ui:ui-home" -> ":core:core-result" [style=dotted]
-  ":ui:ui-home" -> ":core:core-data" [style=dotted]
   ":ui:ui-home" -> ":core:core-utility" [style=dotted]
   ":ui:ui-intro" -> ":ui:ui-intro"
   ":ui:ui-intro" -> ":ui:ui-base" [style=dotted]
   ":ui:ui-intro" -> ":android-core:android-core-binding" [style=dotted]
   ":ui:ui-intro" -> ":android-core:android-core-adapter" [style=dotted]
+  ":ui:ui-splash" -> ":core:core-data"
   ":ui:ui-splash" -> ":ui:ui-splash"
   ":ui:ui-splash" -> ":ui:ui-base" [style=dotted]
   ":ui:ui-splash" -> ":android-core:android-core-binding" [style=dotted]
-  ":ui:ui-splash" -> ":core:core-data" [style=dotted]
   ":weather-stack:remote-repo-weather" -> ":weather-stack:remote-repo-weather"
   ":weather-stack:remote-repo-weather" -> ":core:core-domain" [style=dotted]
   ":weather-stack:use-case-weather" -> ":core:core-domain"
