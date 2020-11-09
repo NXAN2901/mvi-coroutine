@@ -1,3 +1,4 @@
+![](https://github.com/NXAN2901/mvi-coroutine/workflows/CI/badge.svg)
 # mvi-coroutine
 
 MVI playground project using:
