@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_package = "com.example.mvi.data.datastore";
+option java_multiple_files = true;
+
+message AppPreferences {
+
+  enum AppState {
+    UNSPECIFIED = 0;
+    INITIALIZATION = 1;
+    TUTORIAL_PASSED = 2;
+    SIGNED_IN = 3;
+  }
+
+  AppState current_state = 1;
+}

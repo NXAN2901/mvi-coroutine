@@ -25,7 +25,7 @@ dependencies {
     // UseCase
     implementation(useCaseModule("weather"))
     implementation(coreModule("result"))
-    implementation(coreModule("data"))
+    api(coreModule("data"))
     implementation(coreModule("utility"))
 
     implementation(AppDeps.Arch.WorkManager.WORK_KTX)
