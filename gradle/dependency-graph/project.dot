@@ -7,6 +7,7 @@ digraph {
 
   ":android-core:android-core-adapter" [fillcolor="#baffc9"];
   ":android-core:android-core-binding" [fillcolor="#baffc9"];
+  ":android-core:android-core-cache" [fillcolor="#baffc9"];
   ":android-core:android-core-datastore" [fillcolor="#baffc9"];
   ":app" [fillcolor="#baffc9"];
   ":core:core-data" [fillcolor="#baffc9"];
@@ -36,6 +37,8 @@ digraph {
   ":app" -> ":weather-stack:use-case-weather" [style=dotted]
   ":android-core:android-core-adapter" -> ":android-core:android-core-adapter"
   ":android-core:android-core-binding" -> ":android-core:android-core-binding"
+  ":android-core:android-core-cache" -> ":core:core-dispatchers"
+  ":android-core:android-core-cache" -> ":android-core:android-core-cache"
   ":android-core:android-core-datastore" -> ":android-core:android-core-datastore"
   ":core:core-data" -> ":android-core:android-core-datastore"
   ":core:core-data" -> ":core:core-usecase"
