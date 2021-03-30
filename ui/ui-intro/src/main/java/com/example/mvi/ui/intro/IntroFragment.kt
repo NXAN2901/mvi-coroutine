@@ -62,7 +62,7 @@ class IntroFragment : BaseFragment<FragmentIntroBinding, IntroVM>(R.layout.fragm
                 }
                 .launchIn(lifecycleScope)
         }
-        TabLayoutMediator(binding.introTabLayout, binding.introPager) { _, _ -> Unit }.attach()
+        TabLayoutMediator(binding.introTabLayout, binding.introPager) { _, _ -> }.attach()
         introAdapter.submitList(
             listOf(
                 IntroItem("Intro 1", "Des 1"),

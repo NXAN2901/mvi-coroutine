@@ -1,6 +1,10 @@
 package com.example.mvi.ui.home
 
 import android.view.animation.AnimationUtils
+import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.addRepeatingJob
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.core.utility.toDateFormat
@@ -28,7 +32,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
     private val viewIntents by lazy {
         merge(
             flowOf(HomeViewIntent.Initial),
-            binding.header.ivRefresh
+            binding.homeContent.header.ivRefresh
                 .clicks()
                 .map { HomeViewIntent.Refresh }
         )
@@ -39,7 +43,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
     override fun getViewModel(): HomeVM = homeVM
 
     override fun setUpView() {
-        binding.apply {
+        binding.drawer.setScrimColor(ResourcesCompat.getColor(resources, R.color.transparent, null))
+        binding.homeContent.apply {
             scrollableLayout.rvContent.apply {
                 adapter = HomeContentAdapter(emptyList())
                 layoutManager =
@@ -55,13 +60,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
     }
 
     private fun setUpEvent() {
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
             getViewModel().viewState.onEach {
                 renderUIByViewState(it)
             }.collect()
         }
 
         viewIntents
+            .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
             .onEach {
                 getViewModel().processIntent(it)
             }
@@ -73,14 +79,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeVM>(R.layout.fragment
             viewState.forecastItems.let { forecasts ->
                 if (forecasts.isNotEmpty() && forecasts[0] is HomeForecast.CurrentWeather) {
                     val currentWeather = forecasts[0] as HomeForecast.CurrentWeather
-                    appBar.tvCity.text = currentWeather.name
-                    appBar.tvDate.text = currentWeather.time.toDateFormat("yyyy-dd-MM")
-                    appBar.tvTemp.text = String.format(
-                        getString(R.string.home_header_current_temp),
-                        ceil(currentWeather.currentTemp).toInt()
-                    )
+                    binding.homeContent.appBar.apply {
+                        tvCity.text = currentWeather.name
+                        tvDate.text = currentWeather.time.toDateFormat("yyyy-dd-MM")
+                        tvTemp.text = String.format(
+                            getString(R.string.home_header_current_temp),
+                            ceil(currentWeather.currentTemp).toInt()
+                        )
+                    }
                 }
-                scrollableLayout.rvContent.apply {
+                binding.homeContent.scrollableLayout.rvContent.apply {
                     (adapter as HomeContentAdapter).setDataList(forecasts)
                     scheduleLayoutAnimation()
                 }

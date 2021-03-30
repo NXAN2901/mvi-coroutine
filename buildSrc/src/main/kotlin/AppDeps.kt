@@ -16,7 +16,7 @@ object AppDeps {
         }
 
         object LifeCycle {
-            private const val VERSION = "2.2.0"
+            private const val VERSION = "2.4.0-alpha01"
             const val COMMON = "androidx.lifecycle:lifecycle-common:$VERSION"
             const val RUNTIME_KTX = "androidx.lifecycle:lifecycle-runtime-ktx:$VERSION"
             const val RUNTIME = "androidx.lifecycle:lifecycle-runtime:$VERSION"
@@ -172,5 +172,10 @@ object AppDeps {
             const val WORK_KTX ="androidx.work:work-runtime-ktx:$VERSION"
             const val WORK_RXJAVA ="androidx.work:work-rxjava2:$VERSION"
         }
+    }
+
+    object CircleImageView {
+        private const val VERSION = "4.2.0"
+        const val CIRCLE_IMAGE_VIEW = "com.mikhaellopez:circularimageview:$VERSION"
     }
 }

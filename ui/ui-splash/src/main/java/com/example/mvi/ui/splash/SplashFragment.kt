@@ -1,5 +1,9 @@
 package com.example.mvi.ui.splash
 
+import android.util.Log
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.addRepeatingJob
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.mvi.android.core.binding.viewBinding
@@ -30,15 +34,15 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashVM>(R.layout.fr
     }
 
     private fun setUpEvents() {
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.addRepeatingJob(Lifecycle.State.STARTED) {
             getViewModel().viewStateChannel.collect { viewState ->
                 renderUiByViewState(viewState)
             }
         }
 
-        viewIntents.onEach {
-            getViewModel().processIntent(it)
-        }.launchIn(lifecycleScope)
+        viewIntents.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+            .onEach { getViewModel().processIntent(it) }
+            .launchIn(lifecycleScope)
     }
 
     private fun renderUiByViewState(viewState: SplashViewState) {
